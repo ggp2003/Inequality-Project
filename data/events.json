@@ -1,0 +1,44 @@
+[
+  {
+    "step": 0,
+    "year": 1915,
+    "title": "A shared baseline",
+    "body": "The comparable series begins in the early twentieth century, when both countries were marked by high pretax inequality.",
+    "series": "both"
+  },
+  {
+    "step": 1,
+    "year": 1945,
+    "title": "France after war",
+    "body": "France shows a sharp compression around World War II and the immediate postwar settlement.",
+    "series": "france"
+  },
+  {
+    "step": 2,
+    "year": 1980,
+    "title": "The US turn upward",
+    "body": "US pretax inequality rises more visibly from the late twentieth century onward.",
+    "series": "us"
+  },
+  {
+    "step": 3,
+    "year": 1990,
+    "title": "Divergence opens",
+    "body": "The two countries increasingly separate, with the US moving above France by a wider margin.",
+    "series": "both"
+  },
+  {
+    "step": 4,
+    "year": 2000,
+    "title": "The gap as its own story",
+    "body": "The purple line tracks the US-France Gini difference, making the widening distance easier to see.",
+    "series": "gap"
+  },
+  {
+    "step": 5,
+    "year": 2022,
+    "title": "A persistent divide",
+    "body": "By the end of the available series, the comparative inequality gap remains a central feature of the data.",
+    "series": "both"
+  }
+]

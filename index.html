@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Two Inequality Paths</title>
+    <meta
+      name="description"
+      content="A scrollytelling comparison of pretax Gini inequality in the United States and France."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="hero">
+      <p class="eyebrow">Comparative Inequality</p>
+      <h1>Two inequality paths, one century apart</h1>
+      <p class="dek">
+        Scroll through a first look at pretax Gini coefficients in the United States and France.
+        France appears in red, the United States in blue, and the US-France gap in purple.
+      </p>
+    </header>
+
+    <main>
+      <section class="scrolly" aria-label="Interactive comparative inequality timeline">
+        <div class="graphic-wrap">
+          <div class="graphic-card">
+            <div class="chart-heading">
+              <div>
+                <p class="chart-kicker">Pretax Gini coefficient</p>
+                <h2 id="chart-title">United States and France, 1915-2022</h2>
+              </div>
+              <div class="legend" aria-label="Chart legend">
+                <span><i class="swatch swatch-us"></i>United States</span>
+                <span><i class="swatch swatch-france"></i>France</span>
+                <span><i class="swatch swatch-gap"></i>US-France gap</span>
+              </div>
+            </div>
+            <div id="chart" role="img" aria-labelledby="chart-title chart-caption"></div>
+            <p id="chart-caption" class="chart-caption">
+              Scroll to reveal each country, then the gap between them.
+            </p>
+          </div>
+        </div>
+
+        <article class="steps">
+          <section class="step is-active" data-step="0">
+            <p class="step-count">01</p>
+            <h3>Start with the full historical frame</h3>
+            <p>
+              The comparable series begins in 1915. Both countries enter the twentieth-century
+              record with high pretax inequality, but the century that follows does not move them
+              in lockstep.
+            </p>
+          </section>
+
+          <section class="step" data-step="1">
+            <p class="step-count">02</p>
+            <h3>France compresses sharply</h3>
+            <p>
+              The French line falls through the upheaval around World War II and remains lower
+              through much of the postwar period.
+            </p>
+          </section>
+
+          <section class="step" data-step="2">
+            <p class="step-count">03</p>
+            <h3>The US line bends upward</h3>
+            <p>
+              The United States follows a different late-century path. Inequality begins rising
+              more visibly from the late 1970s and 1980s.
+            </p>
+          </section>
+
+          <section class="step" data-step="3">
+            <p class="step-count">04</p>
+            <h3>The comparison becomes the story</h3>
+            <p>
+              Once both lines are visible, the main pattern is the widening distance between them.
+              The US increasingly sits above France in the pretax Gini series.
+            </p>
+          </section>
+
+          <section class="step" data-step="4">
+            <p class="step-count">05</p>
+            <h3>Make the gap visible</h3>
+            <p>
+              The purple line tracks the US-France difference directly. Values above zero mean
+              the US Gini is higher than France's in that year.
+            </p>
+          </section>
+
+          <section class="step" data-step="5">
+            <p class="step-count">06</p>
+            <h3>A persistent divide</h3>
+            <p>
+              By the end of the series, the countries remain separated. This first scrollytelling
+              pass turns the raw comparison into a narrative spine for the broader inequality project.
+            </p>
+          </section>
+        </article>
+      </section>
+
+      <section class="notes">
+        <h2>Data note</h2>
+        <p>
+          This prototype uses the project file <code>2. Data/gini_coefficient.csv</code>. The
+          web-ready data aligns US and France observations by year and computes the difference as
+          United States minus France.
+        </p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
