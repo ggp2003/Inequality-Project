@@ -11,16 +11,225 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <header class="hero">
-      <p class="eyebrow">Comparative Inequality</p>
-      <h1>Two inequality paths, one century apart</h1>
-      <p class="dek">
-        Scroll through a first look at pretax Gini coefficients in the United States and France.
-        France appears in red, the United States in blue, and the US-France gap in purple.
-      </p>
-    </header>
-
     <main>
+      <section class="voc-section" aria-labelledby="voc-title">
+        <div class="voc-intro">
+          <p class="eyebrow">Varieties of Capitalism</p>
+          <h2 id="voc-title">Efficiency and equality across political economies</h2>
+          <p>
+            Move the slider to compare Liberal Market Economies and Coordinated Market Economies
+            in GDP per capita and pretax Gini space. The trendlines show separate annual OLS fits
+            for each group.
+          </p>
+        </div>
+
+        <div class="voc-card">
+          <h3 id="voc-chart-title" class="voc-chart-title">VoC Efficiency-Equality Space</h3>
+          <div class="legend voc-chart-legend" aria-label="VoC chart legend">
+            <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
+            <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
+          </div>
+          <div class="voc-toggle-row">
+            <fieldset class="voc-mode-toggle" aria-label="Regression weighting">
+              <label>
+                <input type="radio" name="voc-weighting" value="unweighted" checked>
+                <span>Unweighted</span>
+              </label>
+              <label>
+                <input type="radio" name="voc-weighting" value="weighted">
+                <span>Weighted</span>
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="voc-chart-shell">
+            <div class="voc-axis-control voc-y-axis-control">
+              <p><strong>Equality</strong> (Gini)</p>
+              <fieldset class="voc-mode-toggle" aria-label="Vertical axis">
+                <label>
+                  <input type="radio" name="voc-y-metric" value="pre_tax_gini" checked>
+                  <span>Pre-tax</span>
+                </label>
+                <label>
+                  <input type="radio" name="voc-y-metric" value="post_tax_gini">
+                  <span>Post-tax</span>
+                </label>
+              </fieldset>
+            </div>
+            <div
+              id="voc-chart"
+              role="img"
+              aria-labelledby="voc-chart-title voc-caption"
+            ></div>
+            <div class="voc-axis-control voc-x-axis-control">
+              <p><strong>Efficiency</strong> (GDP per Capita, 2024 USD)</p>
+              <fieldset class="voc-mode-toggle" aria-label="Horizontal axis">
+                <label>
+                  <input type="radio" name="voc-x-metric" value="gdp_pc_ppp" checked>
+                  <span>PPP-adjusted</span>
+                </label>
+                <label>
+                  <input type="radio" name="voc-x-metric" value="gdp_pc_unadjusted">
+                  <span>Unadjusted</span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="voc-controls">
+            <button id="voc-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="voc-slider-wrap">
+              <input
+                id="voc-year-slider"
+                type="range"
+                min="1980"
+                max="2024"
+                value="2024"
+                step="1"
+              >
+              <div id="voc-year-ticks" class="voc-year-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p id="voc-caption" class="chart-caption voc-source-note">
+            Source: World Inequality Database.
+          </p>
+        </div>
+
+      </section>
+
+      <section class="voc-map-section" aria-labelledby="voc-map-section-title">
+        <div class="voc-map-intro">
+          <p class="eyebrow">Global Typology</p>
+          <h2 id="voc-map-section-title">Where market economies sit on the map</h2>
+          <p>
+            Explore the countries in the Varieties of Capitalism sample. Highlighted LMEs and CMEs
+            reveal their latest efficiency and equality statistics on hover or click.
+          </p>
+        </div>
+
+        <div class="voc-card voc-map-card">
+          <div class="voc-map-heading">
+            <div>
+              <p class="eyebrow">Varieties of Capitalism</p>
+              <h3 id="voc-map-title">Liberal and coordinated market economies</h3>
+            </div>
+            <div class="legend voc-map-legend" aria-label="VoC map legend">
+              <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
+              <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
+            </div>
+          </div>
+          <div class="voc-map-layout">
+            <div id="voc-map" role="img" aria-labelledby="voc-map-title voc-map-caption"></div>
+            <aside id="voc-map-panel" class="voc-map-panel" aria-live="polite">
+              <p class="voc-map-panel-kicker">Hover or click a highlighted country</p>
+              <h3>Country statistics</h3>
+              <p>
+                Select an LME or CME country to see its latest equality and efficiency measures.
+              </p>
+            </aside>
+          </div>
+          <p id="voc-map-caption" class="chart-caption voc-source-note">
+            Source: World Inequality Database.
+          </p>
+        </div>
+      </section>
+
+      <section class="voc-average-section" aria-labelledby="voc-average-section-title">
+        <div class="voc-average-intro">
+          <p class="eyebrow">Group Trajectories</p>
+          <h2 id="voc-average-section-title">Average paths through efficiency-equality space</h2>
+          <p>
+            Follow the LME and CME group averages year by year. Faded earlier points remain visible
+            to show how each model's average position moves over time.
+          </p>
+        </div>
+
+        <div class="voc-card voc-average-card">
+          <h3 id="voc-average-title" class="voc-chart-title">VoC Average Trajectories</h3>
+          <div class="legend voc-chart-legend" aria-label="VoC average chart legend">
+            <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
+            <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
+          </div>
+          <div class="voc-toggle-row">
+            <fieldset class="voc-mode-toggle" aria-label="Average weighting">
+              <label>
+                <input type="radio" name="voc-average-weighting" value="unweighted" checked>
+                <span>Unweighted</span>
+              </label>
+              <label>
+                <input type="radio" name="voc-average-weighting" value="weighted">
+                <span>Weighted</span>
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="voc-chart-shell">
+            <div class="voc-axis-control voc-y-axis-control">
+              <p><strong>Equality</strong> (Gini)</p>
+              <fieldset class="voc-mode-toggle" aria-label="Average vertical axis">
+                <label>
+                  <input type="radio" name="voc-average-y-metric" value="pre_tax_gini" checked>
+                  <span>Pre-tax</span>
+                </label>
+                <label>
+                  <input type="radio" name="voc-average-y-metric" value="post_tax_gini">
+                  <span>Post-tax</span>
+                </label>
+              </fieldset>
+            </div>
+            <div
+              id="voc-average-chart"
+              role="img"
+              aria-labelledby="voc-average-title voc-average-caption"
+            ></div>
+            <div class="voc-axis-control voc-x-axis-control">
+              <p><strong>Efficiency</strong> (GDP per Capita, 2024 USD)</p>
+              <fieldset class="voc-mode-toggle" aria-label="Average horizontal axis">
+                <label>
+                  <input type="radio" name="voc-average-x-metric" value="gdp_pc_ppp" checked>
+                  <span>PPP-adjusted</span>
+                </label>
+                <label>
+                  <input type="radio" name="voc-average-x-metric" value="gdp_pc_unadjusted">
+                  <span>Unadjusted</span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+
+          <div class="voc-controls">
+            <button id="voc-average-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="voc-slider-wrap">
+              <input
+                id="voc-average-year-slider"
+                type="range"
+                min="1980"
+                max="2024"
+                value="2024"
+                step="1"
+              >
+              <div id="voc-average-year-ticks" class="voc-year-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p id="voc-average-caption" class="chart-caption voc-source-note">
+            Source: World Inequality Database.
+          </p>
+        </div>
+      </section>
+
+      <section class="france-intro">
+        <p class="eyebrow">Comparative Inequality</p>
+        <h2>Two inequality paths, one century apart</h2>
+        <p>
+          Scroll through a first look at pretax Gini coefficients in the United States and France.
+          France appears in red, the United States in blue, and the US-France gap in purple.
+        </p>
+      </section>
+
       <section class="scrolly" aria-label="Interactive comparative inequality timeline">
         <div class="graphic-wrap">
           <div class="graphic-card">
@@ -37,7 +246,7 @@
             </div>
             <div id="chart" role="img" aria-labelledby="chart-title chart-caption"></div>
             <p id="chart-caption" class="chart-caption">
-              Scroll to reveal each country, then the gap between them.
+              Scroll to draw the series across each historical period.
             </p>
           </div>
         </div>
@@ -45,72 +254,39 @@
         <article class="steps">
           <section class="step is-active" data-step="0">
             <p class="step-count">01</p>
-            <h3>Start with the full historical frame</h3>
+            <h3>From the start to 1945</h3>
             <p>
-              The comparable series begins in 1915. Both countries enter the twentieth-century
-              record with high pretax inequality, but the century that follows does not move them
-              in lockstep.
+              The comparable series begins in 1915. As the lines draw toward 1945, both countries
+              enter the record with high pretax inequality before the wartime break.
             </p>
           </section>
 
           <section class="step" data-step="1">
             <p class="step-count">02</p>
-            <h3>France compresses sharply</h3>
+            <h3>1945 to 1970</h3>
             <p>
-              The French line falls through the upheaval around World War II and remains lower
-              through much of the postwar period.
+              The postwar period is revealed next. France compresses sharply, while the United
+              States follows a flatter mid-century path before the later turn.
             </p>
           </section>
 
           <section class="step" data-step="2">
             <p class="step-count">03</p>
-            <h3>The US line bends upward</h3>
+            <h3>1970 to the present</h3>
             <p>
-              The United States follows a different late-century path. Inequality begins rising
-              more visibly from the late 1970s and 1980s.
-            </p>
-          </section>
-
-          <section class="step" data-step="3">
-            <p class="step-count">04</p>
-            <h3>The comparison becomes the story</h3>
-            <p>
-              Once both lines are visible, the main pattern is the widening distance between them.
-              The US increasingly sits above France in the pretax Gini series.
-            </p>
-          </section>
-
-          <section class="step" data-step="4">
-            <p class="step-count">05</p>
-            <h3>Make the gap visible</h3>
-            <p>
-              The purple line tracks the US-France difference directly. Values above zero mean
-              the US Gini is higher than France's in that year.
-            </p>
-          </section>
-
-          <section class="step" data-step="5">
-            <p class="step-count">06</p>
-            <h3>A persistent divide</h3>
-            <p>
-              By the end of the series, the countries remain separated. This first scrollytelling
-              pass turns the raw comparison into a narrative spine for the broader inequality project.
+              The final segment completes the path from 1970 onward. The US line bends upward,
+              France remains lower, and the purple gap line makes the widening distance visible.
             </p>
           </section>
         </article>
       </section>
 
-      <section class="notes">
-        <h2>Data note</h2>
-        <p>
-          This prototype uses the project file <code>2. Data/gini_coefficient.csv</code>. The
-          web-ready data aligns US and France observations by year and computes the difference as
-          United States minus France.
-        </p>
-      </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
     <script src="main.js"></script>
+    <script src="voc.js"></script>
+    <script src="map.js"></script>
   </body>
 </html>

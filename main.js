@@ -1,25 +1,19 @@
 const COLORS = {
-  us: "#2563eb",
-  france: "#d64141",
+  us: "#0000FF",
+  france: "#FF0000",
   gap: "#7c3aed",
 };
 
 const captions = [
-  "The chart begins with the full 1915-2022 historical frame.",
-  "France is highlighted first, showing the sharp mid-century compression in inequality.",
-  "The US line appears next, with a stronger late-century rise.",
-  "With both countries visible, the divergence becomes the central comparison.",
-  "The purple line plots the US-France Gini gap directly.",
-  "All series remain visible for the full comparative endpoint.",
+  "Revealing the opening period from 1915 to 1945.",
+  "Continuing through the postwar period, 1945 to 1970.",
+  "Completing the timeline from 1970 to the present.",
 ];
 
-const stateConfig = [
-  { us: 0.12, france: 0.18, gap: 0, band: false, annotationStep: 0 },
-  { us: 0.08, france: 1, gap: 0, band: false, annotationStep: 1 },
-  { us: 1, france: 0.32, gap: 0, band: false, annotationStep: 2 },
-  { us: 1, france: 1, gap: 0, band: true, annotationStep: 3 },
-  { us: 0.34, france: 0.34, gap: 1, band: true, annotationStep: 4 },
-  { us: 1, france: 1, gap: 1, band: true, annotationStep: 5 },
+const periods = [
+  { start: 1915, end: 1945, annotationStep: 0 },
+  { start: 1945, end: 1970, annotationStep: 1 },
+  { start: 1970, end: null, annotationStep: 2 },
 ];
 
 const formatGini = d3.format(".2f");
@@ -29,6 +23,8 @@ let data = [];
 let events = [];
 let chart = null;
 let activeStep = 0;
+let currentRevealProgress = 0;
+let ticking = false;
 
 Promise.all([
   d3.csv("data/gini_scrolly.csv", d3.autoType),
@@ -37,8 +33,8 @@ Promise.all([
   data = giniData;
   events = eventData;
   chart = buildChart();
-  setStep(0);
-  setupObserver();
+  setRevealProgress(0);
+  setupScrollReveal();
   window.addEventListener("resize", debounce(redraw, 150));
 });
 
@@ -86,22 +82,14 @@ function buildChart() {
 
   g.append("g")
     .attr("class", "grid")
-    .call(
-      d3
-        .axisLeft(y)
-        .ticks(6)
-        .tickSize(-innerWidth)
-        .tickFormat("")
-    );
+    .call(d3.axisLeft(y).ticks(6).tickSize(-innerWidth).tickFormat(""));
 
   g.append("g")
     .attr("class", "axis")
     .attr("transform", `translate(0,${innerHeight})`)
     .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(7));
 
-  g.append("g")
-    .attr("class", "axis")
-    .call(d3.axisLeft(y).ticks(6).tickFormat(formatGini));
+  g.append("g").attr("class", "axis").call(d3.axisLeft(y).ticks(6).tickFormat(formatGini));
 
   g.append("text")
     .attr("x", -innerHeight / 2)
@@ -130,6 +118,8 @@ function buildChart() {
     .attr("y2", yGap(0))
     .attr("opacity", 0);
 
+  const seriesGroup = g.append("g").attr("class", "series-reveal");
+
   const line = d3
     .line()
     .x((d) => x(d.year))
@@ -143,49 +133,50 @@ function buildChart() {
     .defined((d) => Number.isFinite(d.value));
 
   const series = {
-    us: data.map((d) => ({ year: d.year, value: d.gini_us })),
     france: data.map((d) => ({ year: d.year, value: d.gini_france })),
+    us: data.map((d) => ({ year: d.year, value: d.gini_us })),
     gap: data.map((d) => ({ year: d.year, value: d.gap_us_minus_france })),
   };
 
-  const francePath = g
+  const francePath = seriesGroup
     .append("path")
-    .datum(series.france)
+    .datum([])
     .attr("class", "series-line series-france")
     .attr("stroke-width", 3)
     .attr("d", line);
 
-  const usPath = g
+  const usPath = seriesGroup
     .append("path")
-    .datum(series.us)
+    .datum([])
     .attr("class", "series-line series-us")
     .attr("stroke-width", 3)
     .attr("d", line);
 
-  const gapPath = g
+  const gapPath = seriesGroup
     .append("path")
-    .datum(series.gap)
+    .datum([])
     .attr("class", "series-line series-gap")
     .attr("stroke-width", 2.5)
     .attr("d", gapLine);
 
-  const endLabels = g.append("g").attr("class", "end-labels");
+  const endLabels = g.append("g").attr("class", "end-labels").style("opacity", 0);
   addEndLabel(endLabels, x, y, 2022, data.at(-1).gini_us, "US", COLORS.us, 0);
   addEndLabel(endLabels, x, y, 2022, data.at(-1).gini_france, "France", COLORS.france, 16);
   addEndLabel(endLabels, x, yGap, 2022, data.at(-1).gap_us_minus_france, "Gap", COLORS.gap, 0);
 
-  const annotation = g.append("g").attr("class", "annotation");
-
   return {
-    svg,
     x,
     y,
     yGap,
+    line,
+    gapLine,
+    series,
     innerHeight,
     focusBand,
     zeroGap,
+    endLabels,
     paths: { us: usPath, france: francePath, gap: gapPath },
-    annotation,
+    annotation: g.append("g").attr("class", "annotation"),
   };
 }
 
@@ -201,31 +192,74 @@ function addEndLabel(group, x, yScale, year, value, label, color, yOffset) {
     .text(label);
 }
 
-function setStep(stepNumber) {
-  activeStep = stepNumber;
-  const config = stateConfig[stepNumber] ?? stateConfig[0];
+function setRevealProgress(progress) {
+  currentRevealProgress = clamp(progress, 0, 1);
+  const revealState = getRevealState(currentRevealProgress);
+  activeStep = revealState.periodIndex;
 
   d3.selectAll(".step").classed("is-active", function () {
-    return Number(this.dataset.step) === stepNumber;
+    return Number(this.dataset.step) === activeStep;
   });
 
-  chart.paths.us
-    .style("opacity", config.us)
-    .attr("stroke-width", config.us >= 1 ? 4 : 2.25);
+  chart.paths.us.attr("stroke-width", 4).style("opacity", 1);
+  chart.paths.france.attr("stroke-width", 4).style("opacity", 1);
+  chart.paths.gap.attr("stroke-width", 3.4).style("opacity", 1);
 
+  chart.paths.us.datum(seriesToYear(chart.series.us, revealState.revealYear)).attr("d", chart.line);
   chart.paths.france
-    .style("opacity", config.france)
-    .attr("stroke-width", config.france >= 1 ? 4 : 2.25);
+    .datum(seriesToYear(chart.series.france, revealState.revealYear))
+    .attr("d", chart.line);
+  chart.paths.gap.datum(seriesToYear(chart.series.gap, revealState.revealYear)).attr("d", chart.gapLine);
 
-  chart.paths.gap
-    .style("opacity", config.gap)
-    .attr("stroke-width", config.gap >= 1 ? 3.6 : 2);
+  const focusOpacity = clamp((revealState.revealYear - 1978) / 18, 0, 1);
+  chart.focusBand.style("opacity", focusOpacity);
+  chart.zeroGap
+    .attr("x2", chart.x(revealState.revealYear))
+    .style("opacity", revealState.revealYear >= 1970 ? 0.65 : 0);
+  chart.endLabels.style("opacity", revealState.revealYear >= data.at(-1).year - 1 ? 1 : 0);
 
-  chart.focusBand.style("opacity", config.band ? 1 : 0);
-  chart.zeroGap.style("opacity", config.gap ? 1 : 0);
+  d3.select("#chart-caption").text(captions[activeStep] ?? captions[0]);
 
-  d3.select("#chart-caption").text(captions[stepNumber] ?? captions[0]);
-  renderAnnotation(config.annotationStep);
+  const event = events.find((d) => d.step === periods[activeStep].annotationStep);
+  if (event && event.year <= revealState.revealYear + 0.5) {
+    renderAnnotation(periods[activeStep].annotationStep);
+  } else {
+    chart.annotation.selectAll("*").remove();
+  }
+}
+
+function getRevealState(progress) {
+  const lastYear = data.at(-1).year;
+  const normalizedPeriods = periods.map((period) => ({
+    ...period,
+    end: period.end ?? lastYear,
+  }));
+  const periodIndex = Math.min(
+    Math.floor(progress * normalizedPeriods.length),
+    normalizedPeriods.length - 1
+  );
+  const localProgress = progress === 1 ? 1 : progress * normalizedPeriods.length - periodIndex;
+  const period = normalizedPeriods[periodIndex];
+  return {
+    periodIndex,
+    revealYear: period.start + (period.end - period.start) * localProgress,
+  };
+}
+
+function seriesToYear(series, revealYear) {
+  const visible = series.filter((d) => d.year <= revealYear);
+  const next = series.find((d) => d.year > revealYear);
+  const previous = visible.at(-1);
+
+  if (previous && next && revealYear > previous.year) {
+    const t = (revealYear - previous.year) / (next.year - previous.year);
+    visible.push({
+      year: revealYear,
+      value: previous.value + (next.value - previous.value) * t,
+    });
+  }
+
+  return visible;
 }
 
 function renderAnnotation(step) {
@@ -329,28 +363,36 @@ function wrapText(text, maxChars) {
   return lines.slice(0, 4);
 }
 
-function setupObserver() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setStep(Number(entry.target.dataset.step));
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "-42% 0px -42% 0px",
-      threshold: 0,
-    }
-  );
+function setupScrollReveal() {
+  window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+  requestScrollUpdate();
+}
 
-  document.querySelectorAll(".step").forEach((step) => observer.observe(step));
+function requestScrollUpdate() {
+  if (ticking) return;
+  ticking = true;
+  window.requestAnimationFrame(() => {
+    setRevealProgress(calculateScrollProgress());
+    ticking = false;
+  });
+}
+
+function calculateScrollProgress() {
+  const steps = document.querySelector(".steps");
+  const start =
+    window.scrollY + steps.getBoundingClientRect().top - window.innerHeight * 0.62;
+  const end = start + steps.offsetHeight - window.innerHeight * 0.72;
+  return clamp((window.scrollY - start) / (end - start), 0, 1);
 }
 
 function redraw() {
   chart = buildChart();
-  setStep(activeStep);
+  const progress = calculateScrollProgress();
+  setRevealProgress(Number.isFinite(progress) ? progress : currentRevealProgress);
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
 }
 
 function debounce(fn, wait) {
