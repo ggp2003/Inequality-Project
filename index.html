@@ -3,23 +3,151 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Two Inequality Paths</title>
+    <title>Efficiency and Equality: A Comparative Political-Economy Analysis</title>
     <meta
       name="description"
-      content="A scrollytelling comparison of pretax Gini inequality in the United States and France."
+      content="Interactive comparisons of pretax Gini inequality across political economies and the US-France gap."
     >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <main>
-      <section class="voc-section" aria-labelledby="voc-title">
-        <div class="voc-intro">
-          <p class="eyebrow">Varieties of Capitalism</p>
-          <h2 id="voc-title">Efficiency and equality across political economies</h2>
+      <header class="page-hero">
+        <h1 class="page-title">
+          <span class="page-title-line">Efficiency and Equality:</span>
+          <span class="page-title-line page-title-subtitle">A Comparative Political-Economy Analysis</span>
+        </h1>
+        <nav class="page-nav" aria-label="Page sections">
+          <a href="#voc-typology">Varieties of Capitalism</a>
+          <a href="#voc-map-section">VoCs on the Map</a>
+          <a href="#voc-efficiency">Efficiency-Equality Space</a>
+          <a href="#voc-averages">Average Trajectories</a>
+          <a href="#us-france">US-France Inequality</a>
+        </nav>
+      </header>
+
+      <section id="voc-typology" class="voc-typology-section" aria-labelledby="voc-typology-title">
+        <div class="voc-typology-intro">
+          <p class="eyebrow">Political Economy Typology</p>
+          <h2 id="voc-typology-title">Varieties of Capitalism</h2>
           <p>
-            Move the slider to compare Liberal Market Economies and Coordinated Market Economies
-            in GDP per capita and pretax Gini space. The trendlines show separate annual OLS fits
-            for each group.
+            The Varieties of Capitalism framework classifies advanced market economies into two ideal
+            types&mdash;liberal market economies (LMEs) and coordinated market economies (CMEs)&mdash;that
+            differ systematically in how firms, workers, and capital interact.
+          </p>
+        </div>
+
+        <div class="voc-card voc-typology-card">
+          <div class="voc-typology-headers">
+            <div class="voc-typology-header voc-typology-header-lme">
+              <h3>Liberal Market Economies</h3>
+              <img src="data/LME.jpg" width="200" height="125" alt="United States and United Kingdom flags">
+            </div>
+            <div class="voc-typology-header voc-typology-header-cme">
+              <h3>Coordinated Market Economies</h3>
+              <img src="data/CME.jpg" width="200" height="125" alt="European Union and Japan flags">
+            </div>
+          </div>
+
+          <table class="voc-typology-table">
+            <caption class="sr-only">Comparison of liberal and coordinated market economies</caption>
+            <thead class="sr-only">
+              <tr>
+                <th scope="col">Liberal Market Economies</th>
+                <th scope="col">Category</th>
+                <th scope="col">Coordinated Market Economies</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="voc-typology-lme">Individual</td>
+                <td class="voc-typology-category">Boundaries</td>
+                <td class="voc-typology-cme">Collective</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">Short-Term</td>
+                <td class="voc-typology-category">Time Horizons</td>
+                <td class="voc-typology-cme">Long-Term</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">Capital</td>
+                <td class="voc-typology-category">Factor Focus</td>
+                <td class="voc-typology-cme">Labor</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">&lsquo;Impatient&rsquo;</td>
+                <td class="voc-typology-category">Capital Type</td>
+                <td class="voc-typology-cme">&lsquo;Patient&rsquo;</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">Flexibility</td>
+                <td class="voc-typology-category">Labor Strategy</td>
+                <td class="voc-typology-cme">Commitment</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">Efficiency</td>
+                <td class="voc-typology-category">Economic Focus</td>
+                <td class="voc-typology-cme">Equality</td>
+              </tr>
+              <tr>
+                <td class="voc-typology-lme">Radical</td>
+                <td class="voc-typology-category">Innovation Type</td>
+                <td class="voc-typology-cme">Incremental</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="voc-map-section" class="voc-map-section" aria-labelledby="voc-map-section-title">
+        <div class="voc-map-intro">
+          <p class="eyebrow">Global Typology</p>
+          <h2 id="voc-map-section-title">VoCs on the Map</h2>
+          <p>
+            Explore the countries in the Varieties of Capitalism sample. Highlighted LMEs and CMEs
+            reveal their latest efficiency and equality statistics on hover or click.
+          </p>
+        </div>
+
+        <div class="voc-card voc-map-card">
+          <div class="voc-map-heading">
+            <div>
+              <p class="eyebrow">Varieties of Capitalism</p>
+              <h3 id="voc-map-title">Liberal and coordinated market economies</h3>
+            </div>
+            <div class="legend voc-map-legend" aria-label="VoC map legend">
+              <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
+              <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
+            </div>
+          </div>
+          <div class="voc-map-layout">
+            <div id="voc-map" role="img" aria-labelledby="voc-map-title voc-map-caption"></div>
+            <aside id="voc-map-panel" class="voc-map-panel" aria-live="polite">
+              <p class="voc-map-panel-kicker">Hover or click a highlighted country</p>
+              <h3>Country statistics</h3>
+              <p>
+                Select an LME or CME country to see its latest equality and efficiency measures.
+              </p>
+            </aside>
+          </div>
+          <p id="voc-map-caption" class="chart-caption voc-source-note">
+            Source: World Inequality Database.
+          </p>
+        </div>
+      </section>
+
+      <section id="voc-efficiency" class="voc-section" aria-labelledby="voc-title">
+        <div class="voc-intro">
+          <p class="eyebrow">Varieties of Capitalism (VoC)</p>
+          <h2 id="voc-title">
+            <span class="voc-title-line">Efficiency and Equality</span>
+            <span class="voc-title-line">across advanced market economies</span>
+          </h2>
+          <p>
+            Below the diagram, either press the Play button, or manually move the slider to compare
+            Liberal Market Economies (LMEs) and Coordinated Market Economies (CMEs) in
+            efficiency-equality space. The trendlines show separate annual OLS fits for each
+            Variety of Capitalism (VoC).
           </p>
         </div>
 
@@ -65,12 +193,12 @@
               <p><strong>Efficiency</strong> (GDP per Capita, 2024 USD)</p>
               <fieldset class="voc-mode-toggle" aria-label="Horizontal axis">
                 <label>
-                  <input type="radio" name="voc-x-metric" value="gdp_pc_ppp" checked>
-                  <span>PPP-adjusted</span>
-                </label>
-                <label>
                   <input type="radio" name="voc-x-metric" value="gdp_pc_unadjusted">
                   <span>Unadjusted</span>
+                </label>
+                <label>
+                  <input type="radio" name="voc-x-metric" value="gdp_pc_ppp" checked>
+                  <span>PPP-adjusted</span>
                 </label>
               </fieldset>
             </div>
@@ -93,50 +221,13 @@
             </div>
           </div>
           <p id="voc-caption" class="chart-caption voc-source-note">
-            Source: World Inequality Database.
+            Source: World Inequality Database
           </p>
         </div>
 
       </section>
 
-      <section class="voc-map-section" aria-labelledby="voc-map-section-title">
-        <div class="voc-map-intro">
-          <p class="eyebrow">Global Typology</p>
-          <h2 id="voc-map-section-title">Where market economies sit on the map</h2>
-          <p>
-            Explore the countries in the Varieties of Capitalism sample. Highlighted LMEs and CMEs
-            reveal their latest efficiency and equality statistics on hover or click.
-          </p>
-        </div>
-
-        <div class="voc-card voc-map-card">
-          <div class="voc-map-heading">
-            <div>
-              <p class="eyebrow">Varieties of Capitalism</p>
-              <h3 id="voc-map-title">Liberal and coordinated market economies</h3>
-            </div>
-            <div class="legend voc-map-legend" aria-label="VoC map legend">
-              <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
-              <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
-            </div>
-          </div>
-          <div class="voc-map-layout">
-            <div id="voc-map" role="img" aria-labelledby="voc-map-title voc-map-caption"></div>
-            <aside id="voc-map-panel" class="voc-map-panel" aria-live="polite">
-              <p class="voc-map-panel-kicker">Hover or click a highlighted country</p>
-              <h3>Country statistics</h3>
-              <p>
-                Select an LME or CME country to see its latest equality and efficiency measures.
-              </p>
-            </aside>
-          </div>
-          <p id="voc-map-caption" class="chart-caption voc-source-note">
-            Source: World Inequality Database.
-          </p>
-        </div>
-      </section>
-
-      <section class="voc-average-section" aria-labelledby="voc-average-section-title">
+      <section id="voc-averages" class="voc-average-section" aria-labelledby="voc-average-section-title">
         <div class="voc-average-intro">
           <p class="eyebrow">Group Trajectories</p>
           <h2 id="voc-average-section-title">Average paths through efficiency-equality space</h2>
@@ -221,72 +312,59 @@
         </div>
       </section>
 
-      <section class="france-intro">
-        <p class="eyebrow">Comparative Inequality</p>
-        <h2>Two inequality paths, one century apart</h2>
-        <p>
-          Scroll through a first look at pretax Gini coefficients in the United States and France.
-          France appears in red, the United States in blue, and the US-France gap in purple.
-        </p>
-      </section>
-
-      <section class="scrolly" aria-label="Interactive comparative inequality timeline">
-        <div class="graphic-wrap">
-          <div class="graphic-card">
-            <div class="chart-heading">
-              <div>
-                <p class="chart-kicker">Pretax Gini coefficient</p>
-                <h2 id="chart-title">United States and France, 1915-2022</h2>
-              </div>
-              <div class="legend" aria-label="Chart legend">
-                <span><i class="swatch swatch-us"></i>United States</span>
-                <span><i class="swatch swatch-france"></i>France</span>
-                <span><i class="swatch swatch-gap"></i>US-France gap</span>
-              </div>
-            </div>
-            <div id="chart" role="img" aria-labelledby="chart-title chart-caption"></div>
-            <p id="chart-caption" class="chart-caption">
-              Scroll to draw the series across each historical period.
-            </p>
-          </div>
+      <section id="us-france" class="history-slider-section" aria-labelledby="history-slider-title">
+        <div class="history-slider-intro">
+          <p class="eyebrow">Interactive Comparison</p>
+          <h2 id="history-slider-title">Reveal the US-France inequality gap over time</h2>
+          <p>
+            Use the slider to reveal both the country histories and the US-France difference through
+            the same year. The left chart compares pretax Gini levels; the right chart isolates the gap.
+          </p>
         </div>
 
-        <article class="steps">
-          <section class="step is-active" data-step="0">
-            <p class="step-count">01</p>
-            <h3>From the start to 1945</h3>
-            <p>
-              The comparable series begins in 1915. As the lines draw toward 1945, both countries
-              enter the record with high pretax inequality before the wartime break.
-            </p>
-          </section>
+        <div class="graphic-card history-slider-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">Pretax Gini coefficient</p>
+              <h3>A Century of US-France Inequality Performance (1920–2020)</h3>
+            </div>
+            <div class="legend" aria-label="History slider legend">
+              <span><i class="swatch swatch-us"></i>United States</span>
+              <span><i class="swatch swatch-france"></i>France</span>
+              <span><i class="swatch swatch-gap"></i>US-France gap</span>
+            </div>
+          </div>
 
-          <section class="step" data-step="1">
-            <p class="step-count">02</p>
-            <h3>1945 to 1970</h3>
-            <p>
-              The postwar period is revealed next. France compresses sharply, while the United
-              States follows a flatter mid-century path before the later turn.
-            </p>
-          </section>
+          <div class="history-slider-grid">
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US and France</p>
+              <div id="history-slider-levels" role="img" aria-label="US and France Gini histories"></div>
+            </div>
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US-France Difference</p>
+              <div id="history-slider-gap" role="img" aria-label="US minus France Gini gap"></div>
+            </div>
+          </div>
 
-          <section class="step" data-step="2">
-            <p class="step-count">03</p>
-            <h3>1970 to the present</h3>
-            <p>
-              The final segment completes the path from 1970 onward. The US line bends upward,
-              France remains lower, and the purple gap line makes the widening distance visible.
-            </p>
-          </section>
-        </article>
+          <div class="history-slider-controls">
+            <button id="history-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="history-slider-slider-wrap">
+              <label for="history-reveal-slider">Reveal through <strong id="history-reveal-year">1920</strong></label>
+              <input id="history-reveal-slider" type="range" min="1920" max="2020" value="1920" step="1">
+              <div id="history-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
       </section>
 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
-    <script src="main.js"></script>
     <script src="voc.js"></script>
     <script src="map.js"></script>
+    <script src="history-slider.js"></script>
   </body>
 </html>
