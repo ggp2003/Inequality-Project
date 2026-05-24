@@ -42,8 +42,8 @@
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 4H3l4-4 4 4H8.1A5 5 0 1 0 12 7z"></path></svg><span class="sr-only">Replay</span>',
   };
 
-  const formatGini = d3.format(".2f");
-  const formatGap = d3.format("+.2f");
+  const formatGdp = d3.format("$,.0f");
+  const formatGap = (value) => `${value >= 0 ? "+" : "-"}${formatGdp(Math.abs(value))}`;
   const HOLD_MS = 3200;
   const MS_PER_YEAR = 180;
 
@@ -61,7 +61,7 @@
   let playbackTarget = null;
   let hasAutoPlayed = false;
 
-  d3.csv("data/gini_scrolly.csv", d3.autoType).then((rows) => {
+  d3.csv("data/gdp_scrolly.csv", d3.autoType).then((rows) => {
     data = rows.filter((d) => d.year >= YEAR_START);
     firstYear = YEAR_START;
     lastYear = YEAR_END;
@@ -80,7 +80,7 @@
   });
 
   function configureSlider() {
-    d3.select("#history-reveal-slider")
+    d3.select("#efficiency-reveal-slider")
       .attr("min", firstYear)
       .attr("max", lastYear)
       .attr("value", firstYear)
@@ -98,7 +98,7 @@
     const tickYears = d3.range(firstYear, lastYear + 1, 5);
     if (!tickYears.includes(lastYear)) tickYears.push(lastYear);
 
-    d3.select("#history-reveal-ticks")
+    d3.select("#efficiency-reveal-ticks")
       .selectAll("span")
       .data(tickYears)
       .join("span")
@@ -107,7 +107,7 @@
   }
 
   function configurePlayback() {
-    d3.select("#history-play-button").on("click", () => {
+    d3.select("#efficiency-play-button").on("click", () => {
       if (isPlaying) {
         stopPlayback(false);
         return;
@@ -137,7 +137,7 @@
       return;
     }
 
-    const section = document.querySelector(".history-slider-section");
+    const section = document.querySelector(".efficiency-history-card");
     if (!section) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -298,7 +298,7 @@
   }
 
   function updatePlaybackButton() {
-    const button = d3.select("#history-play-button");
+    const button = d3.select("#efficiency-play-button");
     const atEnd = currentYear >= lastYear && unlockedTrendlines >= 3;
     const label = isPlaying ? "Pause" : atEnd ? "Replay" : "Play";
     const icon = isPlaying ? playbackIcons.pause : atEnd ? playbackIcons.replay : playbackIcons.play;
@@ -346,7 +346,7 @@
   }
 
   function buildLevelsChart() {
-    const chart = createBaseChart("#history-slider-levels", "Gini coefficient", formatGini, undefined, {}, true);
+    const chart = createBaseChart("#efficiency-slider-levels", "GDP per capita", formatGdp);
     const line = d3
       .line()
       .x((d) => chart.x(d.year))
@@ -354,8 +354,8 @@
       .defined((d) => Number.isFinite(d.value));
 
     const series = {
-      us: data.map((d) => ({ year: d.year, value: d.gini_us })),
-      france: data.map((d) => ({ year: d.year, value: d.gini_france })),
+      us: data.map((d) => ({ year: d.year, value: d.gdp_us })),
+      france: data.map((d) => ({ year: d.year, value: d.gdp_france })),
     };
 
     const annotationLayer = chart.g.append("g").attr("class", "history-annotation-layer");
@@ -381,7 +381,7 @@
 
   function buildGapChart() {
     const chart = createBaseChart(
-      "#history-slider-gap",
+      "#efficiency-slider-gap",
       "US minus France",
       formatGap,
       [d3.min(data, (d) => d.gap_us_minus_france), d3.max(data, (d) => d.gap_us_minus_france)],
@@ -421,7 +421,7 @@
     };
   }
 
-  function createBaseChart(selector, yLabel, tickFormat, explicitYDomain, marginOverrides = {}, invertYAxis = false) {
+  function createBaseChart(selector, yLabel, tickFormat, explicitYDomain, marginOverrides = {}) {
     const container = d3.select(selector);
     const box = container.node().getBoundingClientRect();
     const width = Math.max(360, box.width);
@@ -446,15 +446,13 @@
       .range([0, innerWidth]);
     const yDomain =
       explicitYDomain ??
-      [
-        d3.min(data, (d) => Math.min(d.gini_us, d.gini_france)) - 0.03,
-        d3.max(data, (d) => Math.max(d.gini_us, d.gini_france)) + 0.02,
-      ];
-    const y = d3
-      .scaleLinear()
-      .domain(yDomain)
-      .nice()
-      .range(invertYAxis ? [0, innerHeight] : [innerHeight, 0]);
+      (() => {
+        const minValue = d3.min(data, (d) => Math.min(d.gdp_us, d.gdp_france));
+        const maxValue = d3.max(data, (d) => Math.max(d.gdp_us, d.gdp_france));
+        const padding = (maxValue - minValue) * 0.08;
+        return [Math.max(0, minValue - padding), maxValue + padding];
+      })();
+    const y = d3.scaleLinear().domain(yDomain).nice().range([innerHeight, 0]);
 
     g.append("g")
       .attr("class", "grid")
@@ -491,8 +489,8 @@
     currentYear = year;
     const displayYear = Math.max(Math.round(year), firstYear);
 
-    d3.select("#history-reveal-slider").property("value", displayYear);
-    d3.select("#history-reveal-year").text(displayYear);
+    d3.select("#efficiency-reveal-slider").property("value", displayYear);
+    d3.select("#efficiency-reveal-year").text(displayYear);
 
     charts.levels.paths.us
       .datum(seriesToYear(charts.levels.series.us, year))

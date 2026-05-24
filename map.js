@@ -27,17 +27,155 @@
   const formatGini = d3.format(".3f");
   const formatPopulation = d3.format(",.0f");
   let mapData = new Map();
+  let censusPoints = [];
+  let censusYear = null;
   let selectedCountry = null;
 
-  Promise.all([
-    d3.csv("data/voc_map_points.csv", d3.autoType),
-    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
-  ]).then(([points, world]) => {
+  d3.csv("data/voc_map_points.csv", d3.autoType).then((points) => {
     const latestYear = d3.max(points, (d) => d.year);
+    censusPoints = points;
+    censusYear = d3.min(points, (d) => d.year);
     mapData = new Map(points.filter((d) => d.year === latestYear).map((d) => [d.country, d]));
-    buildMap(world);
-    window.addEventListener("resize", debounce(buildMap.bind(null, world), 150));
+    if (!window.__vocCensusReady) buildCensus();
+    d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then((world) => {
+      buildMap(world);
+      window.addEventListener(
+        "resize",
+        debounce(() => {
+          if (!window.__vocCensusReady) buildCensus();
+          buildMap(world);
+        }, 150)
+      );
+    });
   });
+
+  function buildCensus() {
+    const container = d3.select("#voc-census");
+    if (container.empty() || !censusPoints.length) return;
+
+    const years = Array.from(new Set(censusPoints.map((d) => d.year))).sort((a, b) => a - b);
+    if (!years.includes(censusYear)) censusYear = years[0];
+
+    const slider = d3.select("#voc-census-slider");
+    if (!slider.empty()) {
+      slider
+        .attr("min", years[0])
+        .attr("max", years[years.length - 1])
+        .attr("step", 1)
+        .property("value", censusYear)
+        .on("input", (event) => {
+          censusYear = Number(event.currentTarget.value);
+          renderCensus(container);
+        });
+    }
+
+    renderCensus(container);
+  }
+
+  function renderCensus(container) {
+    const yearPoints = censusPoints.filter((d) => d.year === censusYear);
+    if (!yearPoints.length) return;
+
+    const grouped = ["LME", "CME"].map((voc) => {
+      const countries = yearPoints
+        .filter((d) => d.voc === voc)
+        .sort((a, b) => d3.descending(a.population, b.population));
+      return {
+        voc,
+        label: voc === "LME" ? "Liberal Market Economies" : "Coordinated Market Economies",
+        countries,
+        total: d3.sum(countries, (d) => d.population),
+      };
+    });
+    const maxTotal = d3.max(grouped, (d) => d.total);
+    const radius = d3.scaleSqrt().domain([0, maxTotal]).range([64, 132]);
+
+    d3.select("#voc-census-year").text(censusYear);
+    container.selectAll("*").remove();
+
+    const cards = container
+      .selectAll(".voc-census-pie")
+      .data(grouped)
+      .join("div")
+      .attr("class", (d) => `voc-census-pie voc-census-pie-${d.voc.toLowerCase()}`);
+
+    cards
+      .append("h4")
+      .attr("class", (d) => `voc-census-type voc-census-type-${d.voc.toLowerCase()}`)
+      .text((d) => d.label);
+
+    cards
+      .append("p")
+      .attr("class", "voc-census-total")
+      .text((d) => `${formatPopulation(d.total)} people`);
+
+    cards.each(function (group) {
+      const size = 300;
+      const r = radius(group.total);
+      const color = censusColorScale(group);
+      const arc = d3.arc().innerRadius(0).outerRadius(r);
+      const pie = d3
+        .pie()
+        .sort(null)
+        .value((d) => d.population);
+
+      const svg = d3
+        .select(this)
+        .append("svg")
+        .attr("viewBox", `0 0 ${size} ${size}`)
+        .attr("role", "img")
+        .attr("aria-label", `${group.label} population shares in ${censusYear}`);
+
+      const g = svg.append("g").attr("transform", `translate(${size / 2},${size / 2})`);
+
+      g.selectAll("path")
+        .data(pie(group.countries))
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d) => color(d.data.country))
+        .attr("stroke", "#fffdf8")
+        .attr("stroke-width", 1.4)
+        .append("title")
+        .text((d) => `${d.data.label}: ${formatPopulation(d.data.population)}`);
+
+      const labels = g
+        .selectAll("text")
+        .data(pie(group.countries).filter((d) => (d.endAngle - d.startAngle) > 0.18))
+        .join("text")
+        .attr("transform", (d) => `translate(${arc.centroid(d)})`)
+        .attr("text-anchor", "middle")
+        .attr("dy", "0.32em")
+        .text((d) => d.data.country);
+
+      labels.filter((d) => d.data.country === "US" || d.data.country === "JP").attr("font-size", 13);
+
+      const list = d3.select(this).append("ul").attr("class", "voc-census-list");
+      list
+        .selectAll("li")
+        .data(group.countries)
+        .join("li")
+        .html(
+          (d) => `
+            <span><i style="background:${color(d.country)}"></i>${d.label}</span>
+            <strong>${formatPopulation(d.population)}</strong>
+          `
+        );
+    });
+  }
+
+  function censusColorScale(group) {
+    const base = group.voc === "LME" ? d3.rgb(VOC_COLORS.LME) : d3.rgb(VOC_COLORS.CME);
+    const countries = group.countries.map((d) => d.country);
+    return d3
+      .scaleOrdinal()
+      .domain(countries)
+      .range(
+        countries.map((_, index) => {
+          const t = countries.length <= 1 ? 0.25 : index / (countries.length - 1);
+          return d3.interpolateRgb(base.brighter(1.65), base.darker(0.75))(t);
+        })
+      );
+  }
 
   function buildMap(world) {
     const container = d3.select("#voc-map");
@@ -190,10 +328,16 @@
   }
 
   function showPanel(datum) {
+    const vocLabel = datum.voc === "LME" ? "Liberal Market Economy" : "Coordinated Market Economy";
+    const vocClass = datum.voc.toLowerCase();
     d3.select("#voc-map-panel").html(`
-      <p class="voc-map-panel-kicker">${datum.voc === "LME" ? "Liberal Market Economy" : "Coordinated Market Economy"}</p>
+      <p class="voc-map-panel-kicker voc-map-panel-kicker-${vocClass}">${vocLabel}</p>
       <h3>${datum.label}</h3>
       <dl>
+        <div>
+          <dt>Population</dt>
+          <dd>${formatPopulation(datum.population)}</dd>
+        </div>
         <div>
           <dt>Efficiency, PPP-adjusted</dt>
           <dd>${formatDollar(datum.gdp_pc_ppp)}</dd>
@@ -209,10 +353,6 @@
         <div>
           <dt>Equality, post-tax Gini</dt>
           <dd>${formatGini(datum.post_tax_gini)}</dd>
-        </div>
-        <div>
-          <dt>Population</dt>
-          <dd>${formatPopulation(datum.population)}</dd>
         </div>
       </dl>
       <p class="voc-map-year">${datum.year}</p>

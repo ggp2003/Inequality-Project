@@ -3,43 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Efficiency &amp; Equality: A Comparative Political-Economy Analysis</title>
-    <meta
-      name="description"
-      content="Interactive comparisons of pretax Gini inequality across political economies and the US-France gap."
-    >
+    <title>Efficiency &amp; Equality — Presentation</title>
+    <meta name="description" content="Slide deck: interactive efficiency and equality analysis.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="deck.css">
   </head>
-  <body>
-    <main>
-      <header class="page-hero">
-        <h1 class="page-title">
-          <span class="page-title-line">Efficiency &amp; Equality:</span>
-          <span class="page-title-line page-title-subtitle">A Comparative Political-Economy Analysis</span>
-        </h1>
-        <p class="page-copyright">Copyright &copy; 2026 Garry Piepenbrock</p>
-        <nav class="page-nav" aria-label="Page sections">
-          <a href="#voc-typology">Varieties of Capitalism</a>
-          <a href="#voc-map-section">VoCs on the Map</a>
-          <a href="#voc-efficiency">Efficiency-Equality Space</a>
-          <a href="#voc-averages">Average Trajectories</a>
-          <a href="#us-france">US-France Inequality</a>
-          <a href="#references">References</a>
-          <a href="slides.html">Presentation</a>
-        </nav>
-      </header>
-
-      <section id="voc-typology" class="voc-typology-section" aria-labelledby="voc-typology-title">
-        <div class="voc-typology-intro">
-          <p class="eyebrow">Political Economy Typology</p>
-          <h2 id="voc-typology-title">Varieties of Capitalism</h2>
-          <p>
-            The Varieties of Capitalism (VoC) framework classifies advanced market economies into two ideal
-            types&mdash;liberal market economies (LMEs) and coordinated market economies (CMEs)&mdash;that
-            differ systematically in how firms interact with the institutions of capital and labor.
-          </p>
+  <body class="deck-mode">
+    <div class="deck-viewport">
+      <div class="deck-track">
+      <section class="deck-slide deck-slide-title is-active" data-slide-id="title" aria-hidden="false">
+        <div class="deck-slide-inner">
+          <h1 class="page-title">
+            <span class="page-title-line">Efficiency &amp; Equality:</span>
+            <span class="page-title-line page-title-subtitle">A Comparative Political-Economy Analysis</span>
+          </h1>
+          <p class="page-copyright">Copyright &copy; 2026 Garry Piepenbrock</p>
+          <p class="deck-hint">Use arrow keys or the controls below to navigate. All charts are fully interactive.</p>
         </div>
+      </section>
 
+      <section class="deck-slide" data-slide-id="voc-typology" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Political Economy Typology</p><h2>Varieties of Capitalism</h2><p>The VoC framework classifies economies that differ in how firms interact with the institutions of capital and labor.</p></div>
+          <section id="voc-typology" class="voc-typology-section" aria-labelledby="voc-typology-title">
         <div class="voc-card voc-typology-card">
           <div class="voc-typology-headers">
             <div class="voc-typology-header voc-typology-header-lme">
@@ -158,17 +144,13 @@
           </div>
         </div>
       </section>
-
-      <section id="voc-map-section" class="voc-map-section" aria-labelledby="voc-map-section-title">
-        <div class="voc-map-intro">
-          <p class="eyebrow">Political Economy Taxonomy</p>
-          <h2 id="voc-map-section-title">VoC Census</h2>
-          <p>
-            Population-weighted LMEs and CMEs show the relative size and changing national
-            composition of each Varieties of Capitalism census over time.
-          </p>
         </div>
+      </section>
 
+      <section class="deck-slide" data-slide-id="voc-map-section" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Political Economy Taxonomy</p><h2>VoC Census</h2><p>Population-weighted LMEs and CMEs, followed by the canonical VoC map.</p></div>
+          <section id="voc-map-section" class="voc-map-section" aria-labelledby="voc-map-section-title">
         <div class="voc-card voc-census-card">
           <div class="voc-map-heading">
             <div>
@@ -183,7 +165,6 @@
             <input id="voc-census-slider" type="range" min="1980" max="2024" value="1980" step="1">
           </div>
         </div>
-
         <div class="voc-card voc-map-card">
           <div class="voc-map-heading">
             <div>
@@ -214,18 +195,13 @@
           </p>
         </div>
       </section>
-
-      <section id="voc-efficiency" class="voc-section" aria-labelledby="voc-title">
-        <div class="voc-intro">
-          <p class="eyebrow">Cross-sectional Analysis</p>
-          <h2 id="voc-title">VoC Performance: Efficiency and Equality</h2>
-          <p>
-            Below the diagram, either press the Play button, or manually move the slider to compare
-            LMEs and CMEs in efficiency-equality space. The trendlines show separate annual OLS
-            fits for each VoC.
-          </p>
         </div>
+      </section>
 
+      <section class="deck-slide" data-slide-id="voc-efficiency" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Cross-sectional Analysis</p><h2>VoC Performance: Efficiency and Equality</h2><p>Below the diagram, either press the Play button, or manually move the slider to compare LMEs and CMEs in efficiency-equality space. The trendlines show separate annual OLS fits for each VoC.</p></div>
+          <section id="voc-efficiency" class="voc-section" aria-labelledby="voc-title">
         <div class="voc-card">
           <h3 id="voc-chart-title" class="voc-chart-title">VoC Efficiency-Equality Space</h3>
           <div class="legend voc-chart-legend" aria-label="VoC chart legend">
@@ -301,13 +277,13 @@
         </div>
 
       </section>
-
-      <section id="voc-averages" class="voc-average-section" aria-labelledby="voc-average-section-title">
-        <div class="voc-average-intro">
-          <p class="eyebrow">Longitudinal Analysis</p>
-          <h2 id="voc-average-section-title">Trajectories in Efficiency - Equality Space</h2>
         </div>
+      </section>
 
+      <section class="deck-slide" data-slide-id="voc-averages" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Longitudinal Analysis</p><h2>Trajectories in Efficiency - Equality Space</h2></div>
+          <section id="voc-averages" class="voc-average-section" aria-labelledby="voc-average-section-title">
         <div class="voc-card voc-average-card">
           <h3 id="voc-average-title" class="voc-chart-title">VoC Average Trajectories</h3>
           <div class="legend voc-chart-legend" aria-label="VoC average chart legend">
@@ -382,16 +358,13 @@
           </p>
         </div>
       </section>
-
-      <section id="us-france" class="history-slider-section" aria-labelledby="history-slider-title">
-        <div class="history-slider-intro">
-          <p class="eyebrow">Macroeconomic Inequality Case Study</p>
-          <h2 id="history-slider-title">The Evolution of Inequality in the LME US and &lsquo;CME&rsquo; France</h2>
-          <p>
-            Explore how France&rsquo;s Mixed Market Economy (MME) status has evolved towards CMEs.
-          </p>
         </div>
+      </section>
 
+      <section class="deck-slide" data-slide-id="us-france" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Macroeconomic Inequality Case Study</p><h2>The Evolution of Inequality in the LME US and (&lsquo;CME&rsquo; France)</h2><p>Explore how France&rsquo;s Mixed Market Economy (MME) status has evolved towards CMEs.</p></div>
+          <section id="us-france" class="history-slider-section" aria-labelledby="history-slider-title">
         <div class="graphic-card history-slider-card">
           <div class="chart-heading">
             <div>
@@ -464,43 +437,133 @@
           </div>
           <p class="chart-caption voc-source-note">Source: Maddison Project Database</p>
         </div>
-
-        <div class="graphic-card history-slider-card gap-space-card">
+        <div class="graphic-card history-slider-card wid-efficiency-ppp-history-card">
           <div class="chart-heading">
             <div>
-              <p class="chart-kicker">Gap Space</p>
-              <h3>US-France Relative Possibilities Frontier</h3>
+              <p class="chart-kicker">GDP per capita, WID PPP</p>
+              <h3>A Century of US-France Efficiency Performance (WID PPP, 1920–2020)</h3>
+            </div>
+            <div class="legend" aria-label="WID PPP efficiency history slider legend">
+              <span><i class="swatch swatch-us"></i>United States</span>
+              <span><i class="swatch swatch-france"></i>France</span>
+              <span><i class="swatch swatch-gap"></i>US-France gap</span>
             </div>
           </div>
-          <div id="us-france-gap-space" role="img" aria-label="US-France GDP per capita gap by Gini gap, 1920 to 2020"></div>
+          <div class="history-slider-grid">
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US and France</p>
+              <div id="wid-efficiency-ppp-slider-levels" role="img" aria-label="US and France WID PPP GDP per capita histories"></div>
+            </div>
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US-France Difference</p>
+              <div id="wid-efficiency-ppp-slider-gap" role="img" aria-label="US minus France WID PPP GDP per capita gap"></div>
+            </div>
+          </div>
           <div class="history-slider-controls">
-            <button id="gap-space-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+            <button id="wid-efficiency-ppp-play-button" class="voc-play-button" type="button" aria-label="Play animation">
               <span class="sr-only">Play</span>
             </button>
             <div class="history-slider-slider-wrap">
-              <label for="gap-space-reveal-slider">Reveal through <strong id="gap-space-reveal-year">1920</strong></label>
-              <input id="gap-space-reveal-slider" type="range" min="1920" max="2020" value="1920" step="1">
-              <div id="gap-space-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
+              <label for="wid-efficiency-ppp-reveal-slider">Reveal through <strong id="wid-efficiency-ppp-reveal-year">1920</strong></label>
+              <input id="wid-efficiency-ppp-reveal-slider" type="range" min="1920" max="2020" value="1920" step="1">
+              <div id="wid-efficiency-ppp-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
             </div>
           </div>
-          <p class="chart-caption voc-source-note">Sources: Maddison Project Database; World Inequality Database</p>
+          <p class="chart-caption voc-source-note">Source: World Inequality Database, PPP constant 2024 dollars</p>
         </div>
-
+        <div class="graphic-card history-slider-card wid-efficiency-market-history-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">GDP per capita, WID market exchange</p>
+              <h3>A Century of US-France Efficiency Performance (WID Market Exchange, 1920–2020)</h3>
+            </div>
+            <div class="legend" aria-label="WID market exchange efficiency history slider legend">
+              <span><i class="swatch swatch-us"></i>United States</span>
+              <span><i class="swatch swatch-france"></i>France</span>
+              <span><i class="swatch swatch-gap"></i>US-France gap</span>
+            </div>
+          </div>
+          <div class="history-slider-grid">
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US and France</p>
+              <div id="wid-efficiency-market-slider-levels" role="img" aria-label="US and France WID market exchange GDP per capita histories"></div>
+            </div>
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">US-France Difference</p>
+              <div id="wid-efficiency-market-slider-gap" role="img" aria-label="US minus France WID market exchange GDP per capita gap"></div>
+            </div>
+          </div>
+          <div class="history-slider-controls">
+            <button id="wid-efficiency-market-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="history-slider-slider-wrap">
+              <label for="wid-efficiency-market-reveal-slider">Reveal through <strong id="wid-efficiency-market-reveal-year">1920</strong></label>
+              <input id="wid-efficiency-market-reveal-slider" type="range" min="1920" max="2020" value="1920" step="1">
+              <div id="wid-efficiency-market-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p class="chart-caption voc-source-note">Source: World Inequality Database, market exchange constant 2024 dollars</p>
+        </div>
       </section>
-
-      <section id="references" class="references-section" aria-labelledby="references-title">
-        <p class="eyebrow">key references</p>
-        <h2 id="references-title">Recommended Reading</h2>
-        <ul class="references-list">
-          <li>Hall and Soskice (2001)</li>
-          <li>Piepenbrock, G. (2021)</li>
-          <li>Piepenbrock, G. (2026a)</li>
-          <li>Piepenbrock, G. (2026b)</li>
-          <li>Piepenbrock, G. (2026c)</li>
-        </ul>
+        </div>
       </section>
+      <section class="deck-slide" data-slide-id="us-france-gap-space" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <div class="deck-slide-head"><p class="deck-slide-kicker">Gap Space</p><h2>US-France Relative Possibilities Frontier</h2></div>
+          <div class="graphic-card history-slider-card gap-space-card">
+            <div class="chart-heading">
+              <div>
+                <p class="chart-kicker">Gap Space</p>
+                <h3>US-France Relative Possibilities Frontier</h3>
+              </div>
+            </div>
+            <div id="us-france-gap-space" role="img" aria-label="US-France GDP per capita gap by Gini gap, 1920 to 2020"></div>
+            <div class="history-slider-controls">
+              <button id="gap-space-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+                <span class="sr-only">Play</span>
+              </button>
+              <div class="history-slider-slider-wrap">
+                <label for="gap-space-reveal-slider">Reveal through <strong id="gap-space-reveal-year">1920</strong></label>
+                <input id="gap-space-reveal-slider" type="range" min="1920" max="2020" value="1920" step="1">
+                <div id="gap-space-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
+              </div>
+            </div>
+            <p class="chart-caption voc-source-note">Sources: Maddison Project Database; World Inequality Database</p>
+          </div>
+        </div>
+      </section>
+      <section class="deck-slide" data-slide-id="references" aria-hidden="true">
+        <div class="deck-slide-inner">
+          <section id="references" class="references-section" aria-labelledby="references-title">
+            <p class="eyebrow">key references</p>
+            <h2 id="references-title">Recommended Reading</h2>
+            <ul class="references-list">
+              <li>Hall and Soskice (2001)</li>
+              <li>Piepenbrock, G. (2021)</li>
+              <li>Piepenbrock, G. (2026a)</li>
+              <li>Piepenbrock, G. (2026b)</li>
+              <li>Piepenbrock, G. (2026c)</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+      </div>
+    </div>
 
-    </main>
+    <div class="deck-chrome" aria-label="Slide navigation">
+      <div class="deck-chrome-side">
+        <button type="button" class="deck-nav-button" data-deck-prev aria-label="Previous slide">&#8592;</button>
+      </div>
+      <div class="deck-chrome-center">
+        <div class="deck-progress" data-deck-progress></div>
+        <p class="deck-counter" data-deck-counter>1 / 8</p>
+      </div>
+      <div class="deck-chrome-side">
+        <a class="deck-full-site" href="index.html">Full site</a>
+        <button type="button" class="deck-nav-button" data-deck-next aria-label="Next slide">&#8594;</button>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
@@ -509,6 +572,9 @@
     <script src="map.js"></script>
     <script src="history-slider.js"></script>
     <script src="efficiency-history-slider.js"></script>
+    <script src="wid-efficiency-ppp-history-slider.js"></script>
+    <script src="wid-efficiency-market-history-slider.js"></script>
     <script src="gap-space.js"></script>
+    <script src="deck.js"></script>
   </body>
 </html>
