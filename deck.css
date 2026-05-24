@@ -230,7 +230,7 @@ body.deck-mode #us-france-gap-space {
 }
 
 body.deck-mode #us-france-gap-space {
-  min-height: 430px;
+  min-height: 0;
 }
 
 body.deck-mode .voc-map-layout {

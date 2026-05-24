@@ -217,8 +217,11 @@
 
     const box = container.node().getBoundingClientRect();
     const width = Math.max(560, box.width);
-    const height = window.innerWidth <= 720 ? 360 : 520;
-    const margin = { top: 28, right: 30, bottom: 76, left: 92 };
+    const height =
+      window.innerWidth <= 720
+        ? 300
+        : Math.round(Math.min(420, Math.max(340, width * 0.44)));
+    const margin = { top: 22, right: 28, bottom: 62, left: 88 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
