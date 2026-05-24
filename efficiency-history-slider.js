@@ -59,7 +59,6 @@
   let playbackFrame = null;
   let holdTimer = null;
   let playbackTarget = null;
-  let hasAutoPlayed = false;
 
   d3.csv("data/gdp_scrolly.csv", d3.autoType).then((rows) => {
     data = rows.filter((d) => d.year >= YEAR_START);
@@ -71,7 +70,6 @@
 
     configureSlider();
     configurePlayback();
-    configureAutoPlayOnScroll();
     charts = buildCharts();
     unlockedTrendlines = 0;
     unlockedAnnotations = 0;
@@ -121,41 +119,6 @@
     });
 
     updatePlaybackButton();
-  }
-
-  function configureAutoPlayOnScroll() {
-    if (document.body.classList.contains("deck-mode")) {
-      window.addEventListener("deck:activate", (event) => {
-        if (event.detail?.id !== "us-france") return;
-        if (hasAutoPlayed || isPlaying) return;
-        if (currentYear >= firstYear || unlockedTrendlines > 0) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        hasAutoPlayed = true;
-        startPlayback();
-      });
-      return;
-    }
-
-    const section = document.querySelector(".efficiency-history-card");
-    if (!section) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting || hasAutoPlayed || isPlaying) return;
-          if (currentYear >= firstYear || unlockedTrendlines > 0) return;
-
-          hasAutoPlayed = true;
-          startPlayback();
-        });
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(section);
   }
 
   function resetPlayback() {
