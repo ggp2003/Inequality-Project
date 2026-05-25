@@ -30,6 +30,7 @@
       xMetricLabel = (metric) =>
         metric === "gdp_pc_ppp" ? "GDP per capita (PPP)" : "GDP per capita (unadjusted)",
       hideUnadjustedX = false,
+      averageXMetricDefault = "gdp_pc_ppp",
     } = config;
 
     const el = (suffix) => `#${prefix}-${suffix}`;
@@ -45,7 +46,7 @@
     let currentYMetric = "pre_tax_gini";
     let averageCurrentYear = 2024;
     let averageModelType = "unweighted";
-    let averageXMetric = "gdp_pc_ppp";
+    let averageXMetric = averageXMetricDefault;
     let averageYMetric = "pre_tax_gini";
     let playbackTimer = null;
     let averagePlaybackTimer = null;
