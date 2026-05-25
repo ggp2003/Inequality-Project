@@ -20,9 +20,8 @@
         <p class="page-copyright">Copyright &copy; 2026 Garry Piepenbrock</p>
         <nav class="page-nav" aria-label="Page sections">
           <a href="#voc-typology">Varieties of Capitalism</a>
-          <a href="#voc-map-section">VoCs on the Map</a>
+          <a href="#voc-map-section">VoC Census</a>
           <a href="#voc-efficiency">Efficiency-Equality Space</a>
-          <a href="#voc-averages">Average Trajectories</a>
           <a href="#us-france">US-France Inequality</a>
           <a href="#references">References</a>
           <a href="slides.html">Presentation</a>
@@ -35,8 +34,8 @@
           <h2 id="voc-typology-title">Varieties of Capitalism</h2>
           <p>
             The Varieties of Capitalism (VoC) framework classifies advanced market economies into two ideal
-            types&mdash;liberal market economies (LMEs) and coordinated market economies (CMEs)&mdash;that
-            differ systematically in how firms interact with the institutions of capital and labor.
+            types&mdash;liberal market economies (LMEs) &amp; coordinated market economies (CMEs)&mdash;that
+            differ systematically in how firms interact with the institutions of capital &amp; labor.
           </p>
         </div>
 
@@ -109,17 +108,16 @@
         <div class="voc-card voc-complementarity-card">
           <p class="eyebrow">Typology Mechanism</p>
           <h3 class="voc-complementarity-title">&lsquo;Strategic Complementarities&rsquo;</h3>
-          <p class="voc-complementarity-subtitle">(Reinforcing Feedback)</p>
           <p class="voc-complementarity-text">
-            Positive reinforcing feedbacks between the institutions of Capital and Labor create and
+            Positive reinforcing feedbacks between the institutions of Capital &amp; Labor create &amp;
             sustain variance between VoCs.
           </p>
 
           <div class="voc-feedback-grid">
             <figure class="voc-feedback-figure">
               <svg class="voc-feedback-svg" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capital Impatience and Labor Flexibility reinforcing feedback">
-                <path class="voc-fb-arc voc-fb-arc-top" pathLength="1" d="M 148 156 C 148 54 372 54 372 156"></path>
-                <path class="voc-fb-arc voc-fb-arc-bottom" pathLength="1" d="M 372 204 C 372 306 148 306 148 204"></path>
+                <path class="voc-fb-arc voc-fb-arc-top" pathLength="1" d="M 148 156 C 148 18 372 18 372 156"></path>
+                <path class="voc-fb-arc voc-fb-arc-bottom" pathLength="1" d="M 372 204 C 372 342 148 342 148 204"></path>
                 <polygon class="voc-fb-arrow voc-fb-arrow-top" points="357,150 387,150 372,181"></polygon>
                 <polygon class="voc-fb-arrow voc-fb-arrow-bottom" points="133,210 163,210 148,179"></polygon>
                 <text class="voc-fb-label voc-fb-label-capital" x="102" y="174" text-anchor="middle">
@@ -138,8 +136,8 @@
 
             <figure class="voc-feedback-figure">
               <svg class="voc-feedback-svg" viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Capital Patience and Labor Commitment reinforcing feedback">
-                <path class="voc-fb-arc voc-fb-arc-top" pathLength="1" d="M 148 156 C 148 54 372 54 372 156"></path>
-                <path class="voc-fb-arc voc-fb-arc-bottom" pathLength="1" d="M 372 204 C 372 306 148 306 148 204"></path>
+                <path class="voc-fb-arc voc-fb-arc-top" pathLength="1" d="M 148 156 C 148 18 372 18 372 156"></path>
+                <path class="voc-fb-arc voc-fb-arc-bottom" pathLength="1" d="M 372 204 C 372 342 148 342 148 204"></path>
                 <polygon class="voc-fb-arrow voc-fb-arrow-top" points="357,150 387,150 372,181"></polygon>
                 <polygon class="voc-fb-arrow voc-fb-arrow-bottom" points="133,210 163,210 148,179"></polygon>
                 <text class="voc-fb-label voc-fb-label-capital" x="102" y="174" text-anchor="middle">
@@ -165,7 +163,7 @@
           <h2 id="voc-map-section-title">VoC Census</h2>
           <p>
             Population-weighted LMEs and CMEs show the relative size and changing national
-            composition of each Varieties of Capitalism census over time.
+            composition of each VoC census over time.
           </p>
         </div>
 
@@ -175,12 +173,18 @@
               <p class="eyebrow">Population Shares</p>
               <h3 id="voc-census-title">LME and CME census composition</h3>
             </div>
-            <div class="voc-census-year" id="voc-census-year">1980</div>
+            <div class="voc-census-year" id="voc-census-year">2024</div>
           </div>
           <div id="voc-census" class="voc-census" role="img" aria-labelledby="voc-census-title"></div>
           <div class="voc-census-control">
-            <label for="voc-census-slider">Year</label>
-            <input id="voc-census-slider" type="range" min="1980" max="2024" value="1980" step="1">
+            <button id="voc-census-play-button" class="voc-play-button" type="button" aria-label="Play census animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="voc-census-slider-wrap">
+              <label for="voc-census-slider">Year</label>
+              <input id="voc-census-slider" type="range" min="1980" max="2024" value="2024" step="1">
+              <div id="voc-census-year-ticks" class="voc-year-ticks" aria-hidden="true"></div>
+            </div>
           </div>
         </div>
 
@@ -190,8 +194,8 @@
               <p class="eyebrow">Geographic Census</p>
               <h3 id="voc-map-title">VoCs on the Map</h3>
               <p class="voc-map-heading-text">
-                The canonical VoC Census comprises six LMEs and ten CMEs highlighted on the map below.
-                Hover over each nation to reveal key facts on efficiency and equality
+                The canonical VoC Census comprises six LMEs &amp; ten CMEs highlighted on the map below.
+                Hover over each nation to reveal key facts on efficiency &amp; equality.
               </p>
             </div>
             <div class="legend voc-map-legend" aria-label="VoC map legend">
@@ -218,7 +222,7 @@
       <section id="voc-efficiency" class="voc-section" aria-labelledby="voc-title">
         <div class="voc-intro">
           <p class="eyebrow">Cross-sectional Analysis</p>
-          <h2 id="voc-title">VoC Performance: Efficiency and Equality</h2>
+          <h2 id="voc-title">VoC Performance: Efficiency &amp; Equality</h2>
           <p>
             Below the diagram, either press the Play button, or manually move the slider to compare
             LMEs and CMEs in efficiency-equality space. The trendlines show separate annual OLS
@@ -300,16 +304,9 @@
           </p>
         </div>
 
-      </section>
-
-      <section id="voc-averages" class="voc-average-section" aria-labelledby="voc-average-section-title">
-        <div class="voc-average-intro">
-          <p class="eyebrow">Longitudinal Analysis</p>
-          <h2 id="voc-average-section-title">Trajectories in Efficiency - Equality Space</h2>
-        </div>
-
-        <div class="voc-card voc-average-card">
-          <h3 id="voc-average-title" class="voc-chart-title">VoC Average Trajectories</h3>
+        <div class="history-slider-block voc-average-block">
+          <h3 class="history-slider-subheading" id="voc-average-section-title">Average Efficiency-Equality Trajectories</h3>
+          <div class="voc-card voc-average-card">
           <div class="legend voc-chart-legend" aria-label="VoC average chart legend">
             <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
             <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
@@ -344,7 +341,7 @@
             <div
               id="voc-average-chart"
               role="img"
-              aria-labelledby="voc-average-title voc-average-caption"
+              aria-labelledby="voc-average-section-title voc-average-caption"
             ></div>
             <div class="voc-axis-control voc-x-axis-control">
               <p><strong>Efficiency</strong> (GDP per Capita, 2024 USD)</p>
@@ -380,7 +377,9 @@
           <p id="voc-average-caption" class="chart-caption voc-source-note">
             Source: World Inequality Database
           </p>
+          </div>
         </div>
+
       </section>
 
       <section id="us-france" class="history-slider-section" aria-labelledby="history-slider-title">
@@ -393,7 +392,7 @@
         </div>
 
         <div class="history-slider-block">
-          <h3 class="history-slider-subheading">A Century of US-France Inequality Performance (1920–2020)</h3>
+          <h3 class="history-slider-subheading">A Century of US-France <em>Equality</em> Performance (1920–2020)</h3>
           <div class="graphic-card history-slider-card">
           <div class="chart-heading chart-heading--centered">
             <div class="legend" aria-label="History slider legend">
@@ -428,7 +427,7 @@
         </div>
 
         <div class="history-slider-block">
-          <h3 class="history-slider-subheading">A Century of US-France Efficiency Performance (1920–2020)</h3>
+          <h3 class="history-slider-subheading">A Century of US-France <em>Efficiency</em> Performance (1920–2020)</h3>
           <div class="graphic-card history-slider-card efficiency-history-card">
           <div class="chart-heading chart-heading--centered">
             <div class="legend" aria-label="Efficiency history slider legend">
@@ -487,11 +486,23 @@
         <p class="eyebrow">key references</p>
         <h2 id="references-title">Recommended Reading</h2>
         <ul class="references-list">
-          <li>Hall and Soskice (2001)</li>
-          <li>Piepenbrock, G. (2021)</li>
-          <li>Piepenbrock, G. (2026a)</li>
-          <li>Piepenbrock, G. (2026b)</li>
-          <li>Piepenbrock, G. (2026c)</li>
+          <li>
+            Hall, P. and Soskice, D., eds. 2001.
+            <em>Varieties of Capitalism: The Institutional Foundations of Comparative Advantage</em>.
+          </li>
+          <li>
+            Piepenbrock, G., 2026. &ldquo;Toward a Theory of the Evolution of the Global Economy: Exploring the
+            Effect of Varieties of Capitalism on <em>Efficiency</em> and <em>Equality</em>&rdquo;, Stanford University
+            Honors Thesis in Political Science.
+          </li>
+          <li>
+            Piketty, T., 2013. <em>Capital in the 21<sup>st</sup> Century</em>. Cambridge, MA: Harvard University Press.
+          </li>
+          <li>
+            Piepenbrock, G., 2021. &ldquo;Toward a Theory of the Evolution of the Global Political Economy: Competition
+            between Liberal and Coordinated Market Economies&rdquo;, <em>Proceedings of the International System Dynamics
+            Society</em>, Chicago, USA.
+          </li>
         </ul>
       </section>
 

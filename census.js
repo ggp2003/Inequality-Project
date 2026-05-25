@@ -7,11 +7,25 @@
   const container = document.querySelector("#voc-census");
   const slider = document.querySelector("#voc-census-slider");
   const yearLabel = document.querySelector("#voc-census-year");
+  const playButton = document.querySelector("#voc-census-play-button");
+  const yearTicks = document.querySelector("#voc-census-year-ticks");
   if (!container || !slider || !yearLabel) return;
 
   const formatPopulation = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+  const playbackIcons = {
+    play:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg><span class="sr-only">Play</span>',
+    pause:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg><span class="sr-only">Pause</span>',
+    replay:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a7 7 0 1 1-6.32 4H3l4-4 4 4H8.1A5 5 0 1 0 12 7z"></path></svg><span class="sr-only">Replay</span>',
+  };
+  const PLAYBACK_MS = 260;
   let rows = [];
   let years = [];
+  let currentYear = null;
+  let isPlaying = false;
+  let playbackTimer = null;
 
   fetch("data/voc_map_points.csv")
     .then((response) => response.text())
@@ -23,9 +37,15 @@
       slider.min = years[0];
       slider.max = years[years.length - 1];
       slider.step = 1;
-      slider.value = years[0];
-      slider.addEventListener("input", () => render(Number(slider.value)));
-      render(years[0]);
+      currentYear = years[years.length - 1];
+      slider.value = currentYear;
+      slider.addEventListener("input", () => {
+        stopPlayback();
+        render(Number(slider.value));
+      });
+      renderYearTicks();
+      configurePlayback();
+      render(currentYear);
       window.__vocCensusReady = true;
     });
 
@@ -44,7 +64,8 @@
   }
 
   function render(year) {
-    const yearRows = rows.filter((row) => row.year === year);
+    currentYear = nearestYear(year);
+    const yearRows = rows.filter((row) => row.year === currentYear);
     const groups = ["LME", "CME"].map((voc) => {
       const countries = yearRows
         .filter((row) => row.voc === voc)
@@ -58,8 +79,80 @@
     });
     const maxTotal = Math.max(...groups.map((group) => group.total));
 
-    yearLabel.textContent = String(year);
+    slider.value = currentYear;
+    yearLabel.textContent = String(currentYear);
     container.innerHTML = groups.map((group) => renderGroup(group, maxTotal)).join("");
+    updatePlaybackButton();
+  }
+
+  function renderYearTicks() {
+    if (!yearTicks || years.length < 2) return;
+    const tickYears = years.filter((year) => year % 5 === 0);
+    if (!tickYears.includes(years[0])) tickYears.unshift(years[0]);
+    if (!tickYears.includes(years[years.length - 1])) tickYears.push(years[years.length - 1]);
+
+    yearTicks.innerHTML = tickYears
+      .map(
+        (year) =>
+          `<span style="left:${((year - years[0]) / (years[years.length - 1] - years[0])) * 100}%">${year}</span>`
+      )
+      .join("");
+  }
+
+  function configurePlayback() {
+    if (!playButton) return;
+
+    playButton.addEventListener("click", () => {
+      if (isPlaying) {
+        stopPlayback();
+        return;
+      }
+
+      if (currentYear >= years[years.length - 1]) render(years[0]);
+      startPlayback();
+    });
+
+    updatePlaybackButton();
+  }
+
+  function startPlayback() {
+    if (!years.length) return;
+    isPlaying = true;
+    updatePlaybackButton();
+    playbackTimer = window.setInterval(() => {
+      const currentIndex = years.indexOf(currentYear);
+      const nextYear = years[currentIndex + 1];
+      if (!nextYear) {
+        stopPlayback();
+        render(years[years.length - 1]);
+        return;
+      }
+      render(nextYear);
+    }, PLAYBACK_MS);
+  }
+
+  function stopPlayback() {
+    isPlaying = false;
+    if (playbackTimer) {
+      window.clearInterval(playbackTimer);
+      playbackTimer = null;
+    }
+    updatePlaybackButton();
+  }
+
+  function updatePlaybackButton() {
+    if (!playButton || currentYear == null || !years.length) return;
+    const atEnd = currentYear >= years[years.length - 1];
+    const label = isPlaying ? "Pause" : atEnd ? "Replay" : "Play";
+    const icon = isPlaying ? playbackIcons.pause : atEnd ? playbackIcons.replay : playbackIcons.play;
+    playButton.innerHTML = icon;
+    playButton.setAttribute("aria-label", `${label} census animation`);
+  }
+
+  function nearestYear(year) {
+    return years.reduce((closest, candidate) => {
+      return Math.abs(candidate - year) < Math.abs(closest - year) ? candidate : closest;
+    }, years[0]);
   }
 
   function renderGroup(group, maxTotal) {
