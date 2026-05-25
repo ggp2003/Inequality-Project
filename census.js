@@ -23,6 +23,7 @@
   const PLAYBACK_MS = 260;
   let rows = [];
   let years = [];
+  let globalMaxGroupTotal = 0;
   let currentYear = null;
   let isPlaying = false;
   let playbackTimer = null;
@@ -32,6 +33,7 @@
     .then((csvText) => {
       rows = parseCsv(csvText);
       years = Array.from(new Set(rows.map((row) => row.year))).sort((a, b) => a - b);
+      globalMaxGroupTotal = computeGlobalMaxGroupTotal(rows);
       if (!years.length) return;
 
       slider.min = years[0];
@@ -63,6 +65,15 @@
     });
   }
 
+  function computeGlobalMaxGroupTotal(data) {
+    const totalsByYearVoc = new Map();
+    data.forEach((row) => {
+      const key = `${row.year}:${row.voc}`;
+      totalsByYearVoc.set(key, (totalsByYearVoc.get(key) ?? 0) + row.population);
+    });
+    return Math.max(...totalsByYearVoc.values(), 1);
+  }
+
   function render(year) {
     currentYear = nearestYear(year);
     const yearRows = rows.filter((row) => row.year === currentYear);
@@ -77,11 +88,9 @@
         total: countries.reduce((sum, row) => sum + row.population, 0),
       };
     });
-    const maxTotal = Math.max(...groups.map((group) => group.total));
-
     slider.value = currentYear;
     yearLabel.textContent = String(currentYear);
-    container.innerHTML = groups.map((group) => renderGroup(group, maxTotal)).join("");
+    container.innerHTML = groups.map((group) => renderGroup(group, globalMaxGroupTotal)).join("");
     updatePlaybackButton();
   }
 
@@ -155,8 +164,10 @@
     }, years[0]);
   }
 
-  function renderGroup(group, maxTotal) {
-    const radius = 64 + Math.sqrt(group.total / maxTotal) * 68;
+  function renderGroup(group, referenceTotal) {
+    const sizeScale = referenceTotal > 0 ? Math.sqrt(group.total / referenceTotal) : 1;
+    const svgSize = Math.round(300 * sizeScale);
+    const radius = 118;
     const colors = colorRamp(group.voc, group.countries.length);
     const total = group.total || 1;
     let angle = -Math.PI / 2;
@@ -201,7 +212,7 @@
       <div class="voc-census-pie voc-census-pie-${group.voc.toLowerCase()}">
         <h4 class="voc-census-type voc-census-type-${group.voc.toLowerCase()}">${group.label}</h4>
         <p class="voc-census-total">${formatPopulation.format(group.total)} people</p>
-        <svg viewBox="0 0 300 300" role="img" aria-label="${group.label} population shares">
+        <svg viewBox="0 0 300 300" width="${svgSize}" height="${svgSize}" role="img" aria-label="${group.label} population shares">
           <g>${slices}</g>
         </svg>
         <ul class="voc-census-list">${listItems}</ul>
