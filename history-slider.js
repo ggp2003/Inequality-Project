@@ -124,18 +124,7 @@
   }
 
   function configureAutoPlayOnScroll() {
-    if (document.body.classList.contains("deck-mode")) {
-      window.addEventListener("deck:activate", (event) => {
-        if (event.detail?.id !== "us-france") return;
-        if (hasAutoPlayed || isPlaying) return;
-        if (currentYear >= firstYear || unlockedTrendlines > 0) return;
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        hasAutoPlayed = true;
-        startPlayback();
-      });
-      return;
-    }
+    if (document.body.classList.contains("deck-mode")) return;
 
     const section = document.querySelector(".history-slider-section");
     if (!section) return;
@@ -426,7 +415,7 @@
     const box = container.node().getBoundingClientRect();
     const width = Math.max(360, box.width);
     const height = window.innerWidth <= 720 ? 320 : 390;
-    const margin = { top: 18, right: 34, bottom: 42, left: 54, ...marginOverrides };
+    const margin = { top: 18, right: 34, bottom: 42, left: 76, ...marginOverrides };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -469,7 +458,7 @@
 
     g.append("text")
       .attr("x", -innerHeight / 2)
-      .attr("y", -40)
+      .attr("y", -(margin.left - 14))
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle")
       .attr("fill", "#64707d")

@@ -25,6 +25,46 @@
     });
   }
 
+  function syncChromeOffset() {
+    const chrome = document.querySelector(".deck-chrome");
+    if (!chrome) return;
+    document.documentElement.style.setProperty(
+      "--deck-chrome-height",
+      `${Math.ceil(chrome.getBoundingClientRect().height)}px`
+    );
+  }
+
+  function resetSlideFit() {
+    slides.forEach((slide) => {
+      slide.querySelector(".deck-chart-frame")?.style.removeProperty("zoom");
+    });
+  }
+
+  function fitActiveSlide() {
+    resetSlideFit();
+
+    const slide = slides[currentIndex];
+    const inner = slide?.querySelector(".deck-slide-inner");
+    const frame = slide?.querySelector(".deck-chart-frame");
+    if (!inner || !frame) return;
+
+    const available = inner.clientHeight;
+    const needed = frame.scrollHeight;
+    if (needed <= available || available <= 0) return;
+
+    const zoom = Math.max(0.82, available / needed - 0.05);
+    frame.style.zoom = String(Number(zoom.toFixed(3)));
+  }
+
+  function scheduleFit() {
+    syncChromeOffset();
+    window.requestAnimationFrame(() => {
+      fitActiveSlide();
+      window.setTimeout(fitActiveSlide, 120);
+      window.setTimeout(fitActiveSlide, 320);
+    });
+  }
+
   function updateUi() {
     const slide = slides[currentIndex];
     const id = slide?.dataset.slideId ?? "";
@@ -47,14 +87,17 @@
     if (prevButton) prevButton.disabled = currentIndex === 0;
     if (nextButton) nextButton.disabled = currentIndex === slides.length - 1;
 
-    window.setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-      window.dispatchEvent(
-        new CustomEvent("deck:activate", {
-          detail: { index: currentIndex, id },
-        })
-      );
-    }, 80);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("resize"));
+        window.dispatchEvent(
+          new CustomEvent("deck:activate", {
+            detail: { index: currentIndex, id },
+          })
+        );
+        scheduleFit();
+      });
+    });
   }
 
   function goToSlide(index) {
@@ -97,6 +140,12 @@
     }
   });
 
+  window.addEventListener("resize", () => {
+    window.clearTimeout(window.__deckFitTimer);
+    window.__deckFitTimer = window.setTimeout(scheduleFit, 120);
+  });
+
   buildProgress();
+  syncChromeOffset();
   updateUi();
 })();

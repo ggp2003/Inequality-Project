@@ -219,9 +219,9 @@
     const width = Math.max(560, box.width);
     const height =
       window.innerWidth <= 720
-        ? 330
-        : Math.round(Math.min(460, Math.max(380, width * 0.48)));
-    const margin = { top: 22, right: 28, bottom: 62, left: 88 };
+        ? 370
+        : Math.round(Math.min(560, Math.max(460, width * 0.64)));
+    const margin = { top: 22, right: 108, bottom: 82, left: 108 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -281,21 +281,21 @@
       .append("text")
       .attr("class", "gap-space-axis-label")
       .attr("x", innerWidth / 2)
-      .attr("y", innerHeight + 45)
+      .attr("y", innerHeight + 48)
       .attr("text-anchor", "middle");
     xAxisLabel.append("tspan").attr("class", "gap-space-axis-title").attr("x", innerWidth / 2).text("US Relative Efficiency");
     xAxisLabel
       .append("tspan")
       .attr("class", "gap-space-axis-subtitle")
       .attr("x", innerWidth / 2)
-      .attr("dy", 17)
+      .attr("dy", 20)
       .text("(US-France GDP per Capita Gap)");
 
     const yAxisLabel = g
       .append("text")
       .attr("class", "gap-space-axis-label")
       .attr("x", -innerHeight / 2)
-      .attr("y", -66)
+      .attr("y", -84)
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle");
     yAxisLabel.append("tspan").attr("class", "gap-space-axis-title").attr("x", -innerHeight / 2).text("US Relative Equality");
@@ -303,7 +303,7 @@
       .append("tspan")
       .attr("class", "gap-space-axis-subtitle")
       .attr("x", -innerHeight / 2)
-      .attr("dy", 17)
+      .attr("dy", 20)
       .text("(US-France Gini Gap)");
 
     renderPossibilitiesFrontier(g, data, x, y, innerWidth, innerHeight);

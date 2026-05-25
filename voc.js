@@ -59,6 +59,7 @@
     updateVocYear(currentYear, false);
     updateAverageYear(averageCurrentYear, false);
     window.addEventListener("resize", debounceVoc(redrawVocChart, 150));
+    window.addEventListener("resize", debounceVoc(redrawAverageChart, 150));
   });
 
   function configureSlider() {
@@ -161,7 +162,13 @@
     const container = d3.select("#voc-chart");
     const box = container.node().getBoundingClientRect();
     const width = Math.max(680, box.width);
-    const height = window.innerWidth <= 720 ? 390 : 540;
+    const height = document.body.classList.contains("deck-mode")
+      ? window.innerWidth <= 720
+        ? 350
+        : 450
+      : window.innerWidth <= 720
+        ? 390
+        : 540;
     const margin = { top: 8, right: window.innerWidth <= 720 ? 88 : 138, bottom: 46, left: 48 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -243,7 +250,13 @@
     const container = d3.select("#voc-average-chart");
     const box = container.node().getBoundingClientRect();
     const width = Math.max(680, box.width);
-    const height = window.innerWidth <= 720 ? 390 : 540;
+    const height = document.body.classList.contains("deck-mode")
+      ? window.innerWidth <= 720
+        ? 350
+        : 450
+      : window.innerWidth <= 720
+        ? 390
+        : 540;
     const margin = { top: 8, right: window.innerWidth <= 720 ? 88 : 138, bottom: 34, left: 48 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
