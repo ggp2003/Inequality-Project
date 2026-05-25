@@ -22,7 +22,6 @@
           <a href="#voc-typology">Varieties of Capitalism</a>
           <a href="#voc-map-section">VoC Census</a>
           <a href="#voc-efficiency">Efficiency-Equality</a>
-          <a href="#voc-efficiency-ireland">Efficiency-Equality (Ireland)</a>
           <a href="#us-france">US-France Case Study</a>
           <a href="#references">References</a>
           <a href="slides.html">Presentation</a>
@@ -227,7 +226,9 @@
           <p>
             Below the diagram, either press the Play button, or manually move the slider to compare
             LMEs and CMEs in efficiency-equality space. The trendlines show separate annual OLS
-            fits for each VoC.
+            fits for each VoC. Ireland is excluded from the LME census as an outlier as its headline
+            GDP per capita became heavily distorted by multinational accounting practices.
+            <a href="ireland.html">Here</a> is the analysis with modified Irish GNI data included.
           </p>
         </div>
 
@@ -377,162 +378,6 @@
           </div>
           <p id="voc-average-caption" class="chart-caption voc-source-note">
             Source: World Inequality Database
-          </p>
-          </div>
-        </div>
-
-      </section>
-
-      <section id="voc-efficiency-ireland" class="voc-section" aria-labelledby="voc-ie-title">
-        <div class="voc-intro">
-          <p class="eyebrow">Cross-sectional Analysis</p>
-          <h2 id="voc-ie-title">VoC Performance: Efficiency &amp; Equality (including Ireland)</h2>
-          <p>
-            Ireland&rsquo;s headline GDP is distorted by multinational profit-shifting, especially after 2015.
-            This chart includes Ireland using a spliced income series: WID national income per adult for
-            1980&ndash;2014, then CSO modified GNI (GNI*) from 2015 onward converted from EUR to
-            USD per capita (ECB annual exchange rates).
-          </p>
-        </div>
-
-        <div class="voc-card">
-          <h3 id="voc-ie-chart-title" class="voc-chart-title">VoC Efficiency-Equality Space (including Ireland)</h3>
-          <div class="legend voc-chart-legend" aria-label="VoC Ireland chart legend">
-            <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
-            <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
-          </div>
-          <div class="voc-toggle-row">
-            <fieldset class="voc-mode-toggle" aria-label="Ireland chart regression weighting">
-              <label>
-                <input type="radio" name="voc-ie-weighting" value="unweighted" checked>
-                <span>Unweighted</span>
-              </label>
-              <label>
-                <input type="radio" name="voc-ie-weighting" value="weighted">
-                <span>Weighted</span>
-              </label>
-            </fieldset>
-          </div>
-
-          <div class="voc-chart-shell">
-            <div class="voc-axis-control voc-y-axis-control">
-              <p><strong>Equality</strong> (Gini)</p>
-              <fieldset class="voc-mode-toggle" aria-label="Ireland chart vertical axis">
-                <label>
-                  <input type="radio" name="voc-ie-y-metric" value="pre_tax_gini" checked>
-                  <span>Pre-tax</span>
-                </label>
-                <label>
-                  <input type="radio" name="voc-ie-y-metric" value="post_tax_gini">
-                  <span>Post-tax</span>
-                </label>
-              </fieldset>
-            </div>
-            <div
-              id="voc-ie-chart"
-              role="img"
-              aria-labelledby="voc-ie-chart-title voc-ie-caption"
-            ></div>
-            <div class="voc-axis-control voc-x-axis-control" id="voc-ie-x-axis-control">
-              <p><strong>Efficiency</strong> (Income per Capita, 2024 USD PPP)</p>
-              <fieldset class="voc-mode-toggle" aria-label="Ireland chart horizontal axis">
-                <label>
-                  <input type="radio" name="voc-ie-x-metric" value="gdp_pc_ppp" checked>
-                  <span>PPP-adjusted</span>
-                </label>
-              </fieldset>
-            </div>
-          </div>
-
-          <div class="voc-controls">
-            <button id="voc-ie-play-button" class="voc-play-button" type="button" aria-label="Play animation">
-              <span class="sr-only">Play</span>
-            </button>
-            <div class="voc-slider-wrap">
-              <input
-                id="voc-ie-year-slider"
-                type="range"
-                min="1980"
-                max="2024"
-                value="2024"
-                step="1"
-              >
-              <div id="voc-ie-year-ticks" class="voc-year-ticks" aria-hidden="true"></div>
-            </div>
-          </div>
-          <p id="voc-ie-caption" class="chart-caption voc-source-note">
-            Equality and population: World Inequality Database. Ireland efficiency: WID national income per adult (1980&ndash;2014); CSO modified GNI (GNI*) per capita from 2015, converted to USD per capita via ECB annual EUR/USD rates (~$65k in 2024).
-          </p>
-        </div>
-
-        <div class="history-slider-block voc-average-block">
-          <h3 class="history-slider-subheading" id="voc-ie-average-section-title">Average Efficiency-Equality Trajectories (including Ireland)</h3>
-          <div class="voc-card voc-average-card">
-          <div class="legend voc-chart-legend" aria-label="VoC Ireland average chart legend">
-            <span><i class="swatch swatch-lme"></i>Liberal Market Economies</span>
-            <span><i class="swatch swatch-cme"></i>Coordinated Market Economies</span>
-          </div>
-          <div class="voc-toggle-row">
-            <fieldset class="voc-mode-toggle" aria-label="Ireland average weighting">
-              <label>
-                <input type="radio" name="voc-ie-average-weighting" value="unweighted" checked>
-                <span>Unweighted</span>
-              </label>
-              <label>
-                <input type="radio" name="voc-ie-average-weighting" value="weighted">
-                <span>Weighted</span>
-              </label>
-            </fieldset>
-          </div>
-
-          <div class="voc-chart-shell">
-            <div class="voc-axis-control voc-y-axis-control">
-              <p><strong>Equality</strong> (Gini)</p>
-              <fieldset class="voc-mode-toggle" aria-label="Ireland average vertical axis">
-                <label>
-                  <input type="radio" name="voc-ie-average-y-metric" value="pre_tax_gini" checked>
-                  <span>Pre-tax</span>
-                </label>
-                <label>
-                  <input type="radio" name="voc-ie-average-y-metric" value="post_tax_gini">
-                  <span>Post-tax</span>
-                </label>
-              </fieldset>
-            </div>
-            <div
-              id="voc-ie-average-chart"
-              role="img"
-              aria-labelledby="voc-ie-average-section-title voc-ie-average-caption"
-            ></div>
-            <div class="voc-axis-control voc-x-axis-control" id="voc-ie-average-x-axis-control">
-              <p><strong>Efficiency</strong> (Income per Capita, 2024 USD PPP)</p>
-              <fieldset class="voc-mode-toggle" aria-label="Ireland average horizontal axis">
-                <label>
-                  <input type="radio" name="voc-ie-average-x-metric" value="gdp_pc_ppp" checked>
-                  <span>PPP-adjusted</span>
-                </label>
-              </fieldset>
-            </div>
-          </div>
-
-          <div class="voc-controls">
-            <button id="voc-ie-average-play-button" class="voc-play-button" type="button" aria-label="Play animation">
-              <span class="sr-only">Play</span>
-            </button>
-            <div class="voc-slider-wrap">
-              <input
-                id="voc-ie-average-year-slider"
-                type="range"
-                min="1980"
-                max="2024"
-                value="2024"
-                step="1"
-              >
-              <div id="voc-ie-average-year-ticks" class="voc-year-ticks" aria-hidden="true"></div>
-            </div>
-          </div>
-          <p id="voc-ie-average-caption" class="chart-caption voc-source-note">
-            Equality and population: World Inequality Database. Ireland efficiency: WID national income per adult (1980&ndash;2014); CSO modified GNI (GNI*) per capita from 2015, converted to USD per capita via ECB annual EUR/USD rates (~$65k in 2024).
           </p>
           </div>
         </div>

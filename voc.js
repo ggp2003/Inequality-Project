@@ -810,26 +810,30 @@
     }
   }
 
-  initVocDashboard({
-    prefix: "voc",
-    pointsCsv: "data/voc_efficiency_points.csv",
-    regressionsCsv: "data/voc_efficiency_regressions.csv",
-    chartTitle: "VoC Efficiency-Equality Space",
-  });
+  if (document.querySelector("#voc-chart")) {
+    initVocDashboard({
+      prefix: "voc",
+      pointsCsv: "data/voc_efficiency_points.csv",
+      regressionsCsv: "data/voc_efficiency_regressions.csv",
+      chartTitle: "VoC Efficiency-Equality Space",
+    });
+  }
 
-  initVocDashboard({
-    prefix: "voc-ie",
-    pointsCsv: "data/voc_efficiency_points_with_ireland.csv",
-    regressionsCsv: "data/voc_efficiency_regressions_with_ireland.csv",
-    labelledCountries: new Set(["US", "GB", "CA", "DE", "JP", "SE", "IE"]),
-    chartTitle: "VoC Efficiency-Equality Space (including Ireland)",
-    xAxisLabel: "<strong>Efficiency</strong> (Income per Capita, 2024 USD PPP)",
-    xMetricLabel: (metric, d) => {
-      if (d && d.country === "IE") {
-        return "Modified GNI per capita (PPP)";
-      }
-      return metric === "gdp_pc_ppp" ? "Income per capita (PPP)" : "Income per capita (unadjusted)";
-    },
-    hideUnadjustedX: true,
-  });
+  if (document.querySelector("#voc-ie-chart")) {
+    initVocDashboard({
+      prefix: "voc-ie",
+      pointsCsv: "data/voc_efficiency_points_with_ireland.csv",
+      regressionsCsv: "data/voc_efficiency_regressions_with_ireland.csv",
+      labelledCountries: new Set(["US", "GB", "CA", "DE", "JP", "SE", "IE"]),
+      chartTitle: "VoC Efficiency-Equality Space (including Ireland)",
+      xAxisLabel: "<strong>Efficiency</strong> (Income per Capita, 2024 USD PPP)",
+      xMetricLabel: (metric, d) => {
+        if (d && d.country === "IE") {
+          return "Modified GNI per capita (PPP)";
+        }
+        return metric === "gdp_pc_ppp" ? "Income per capita (PPP)" : "Income per capita (unadjusted)";
+      },
+      hideUnadjustedX: true,
+    });
+  }
 })();
