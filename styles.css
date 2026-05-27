@@ -376,6 +376,13 @@ code {
   white-space: nowrap;
 }
 
+.history-slider-description {
+  max-width: 960px;
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.35vw, 1.12rem);
+}
+
 .history-slider-card {
   min-height: auto;
 }
@@ -412,7 +419,9 @@ code {
 #history-slider-levels,
 #history-slider-gap,
 #efficiency-slider-levels,
-#efficiency-slider-gap {
+#efficiency-slider-gap,
+#firm-slider-levels,
+#firm-slider-gap {
   width: 100%;
   min-height: 390px;
 }
@@ -2094,7 +2103,11 @@ code {
   #voc-ie-average-chart,
   #voc-map,
   #history-slider-levels,
-  #history-slider-gap {
+  #history-slider-gap,
+  #efficiency-slider-levels,
+  #efficiency-slider-gap,
+  #firm-slider-levels,
+  #firm-slider-gap {
     min-height: 320px;
   }
 

@@ -487,6 +487,52 @@
           </div>
         </div>
 
+        <div class="history-slider-block">
+          <h3 class="history-slider-subheading">LME-CME Firm-Level Competition (1955-2025)</h3>
+          <p class="history-slider-description">
+            As a case study on LME-CME Firm-Level competition, consider Piepenbrock&rsquo;s (2009) analysis of
+            the famous Boeing-Airbus mixed-duopoly in the commercial aircraft industry. Boeing is a
+            Capital-focused maximizer of Shareholder Value (efficiency), while Airbus is a Labor-focused
+            maximizer of Stakeholder Surplus (equality). As James March (1962) writes in
+            <em>&ldquo;The Business Firm as a Political Coalition&rdquo;</em>, this micro-economic analysis is
+            inherently political: <em>&ldquo;We assume that a business firm is a political coalition and that the
+            executive in the firm is a political broker. The composition of the firm is not given; it is
+            negotiated. The goals of the firm are not given; they are bargained.&rdquo;</em>
+          </p>
+          <div class="graphic-card history-slider-card firm-competition-card">
+          <div class="chart-heading chart-heading--centered">
+            <div class="legend" aria-label="Firm-level competition slider legend">
+              <span><i class="swatch swatch-us"></i>Boeing</span>
+              <span><i class="swatch swatch-france"></i>Airbus</span>
+              <span><i class="swatch swatch-gap"></i>Boeing-Airbus difference</span>
+            </div>
+          </div>
+
+          <div class="history-slider-grid">
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">Boeing and Airbus Deliveries</p>
+              <div id="firm-slider-levels" role="img" aria-label="Boeing and Airbus aircraft delivery histories"></div>
+            </div>
+            <div class="history-slider-panel">
+              <p class="history-slider-panel-title">Boeing-Airbus Difference</p>
+              <div id="firm-slider-gap" role="img" aria-label="Boeing minus Airbus aircraft delivery difference"></div>
+            </div>
+          </div>
+
+          <div class="history-slider-controls">
+            <button id="firm-play-button" class="voc-play-button" type="button" aria-label="Play animation">
+              <span class="sr-only">Play</span>
+            </button>
+            <div class="history-slider-slider-wrap">
+              <label for="firm-reveal-slider">Reveal through <strong id="firm-reveal-year">1955</strong></label>
+              <input id="firm-reveal-slider" type="range" min="1955" max="2025" value="1955" step="1">
+              <div id="firm-reveal-ticks" class="history-reveal-ticks" aria-hidden="true"></div>
+            </div>
+          </div>
+          <p class="chart-caption voc-source-note">Source: Boeing &amp; Airbus deliveries data</p>
+          </div>
+        </div>
+
       </section>
 
       <section id="references" class="references-section" aria-labelledby="references-title">
@@ -527,6 +573,7 @@
     <script src="map.js"></script>
     <script src="history-slider.js"></script>
     <script src="efficiency-history-slider.js"></script>
+    <script src="firm-competition-slider.js"></script>
     <script src="gap-space.js"></script>
   </body>
 </html>
