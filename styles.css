@@ -919,6 +919,10 @@ code {
   font-size: 22px;
   font-weight: 500;
   line-height: 1;
+  opacity: 0;
+  animation-duration: 8.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
 
 .voc-feedback-svg .voc-fb-label-main {
@@ -927,10 +931,12 @@ code {
 
 .voc-feedback-svg .voc-fb-label-capital {
   fill: var(--lme);
+  animation-name: voc-feedback-label-capital;
 }
 
 .voc-feedback-svg .voc-fb-label-labor {
   fill: var(--cme);
+  animation-name: voc-feedback-label-labor;
 }
 
 .voc-feedback-svg .voc-fb-arc {
@@ -1009,7 +1015,7 @@ code {
     opacity: 1;
   }
 
-  42%,
+  32%,
   88% {
     opacity: 1;
     stroke-dashoffset: 0;
@@ -1032,7 +1038,7 @@ code {
     opacity: 1;
   }
 
-  72%,
+  64%,
   88% {
     opacity: 1;
     stroke-dashoffset: 0;
@@ -1044,13 +1050,47 @@ code {
   }
 }
 
-@keyframes voc-feedback-arrow-top {
+@keyframes voc-feedback-label-capital {
   0%,
-  38% {
+  2% {
     opacity: 0;
   }
 
-  42%,
+  8%,
+  88% {
+    opacity: 1;
+  }
+
+  94%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes voc-feedback-label-labor {
+  0%,
+  34% {
+    opacity: 0;
+  }
+
+  40%,
+  88% {
+    opacity: 1;
+  }
+
+  94%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes voc-feedback-arrow-top {
+  0%,
+  28% {
+    opacity: 0;
+  }
+
+  32%,
   88% {
     opacity: 1;
   }
@@ -1062,11 +1102,11 @@ code {
 
 @keyframes voc-feedback-arrow-bottom {
   0%,
-  68% {
+  60% {
     opacity: 0;
   }
 
-  72%,
+  64%,
   88% {
     opacity: 1;
   }
@@ -1078,11 +1118,11 @@ code {
 
 @keyframes voc-feedback-plus-top {
   0%,
-  41% {
+  31% {
     opacity: 0;
   }
 
-  46%,
+  35%,
   86% {
     opacity: 1;
   }
@@ -1095,11 +1135,11 @@ code {
 
 @keyframes voc-feedback-plus-bottom {
   0%,
-  71% {
+  63% {
     opacity: 0;
   }
 
-  76%,
+  67%,
   86% {
     opacity: 1;
   }
@@ -1113,7 +1153,8 @@ code {
 @media (prefers-reduced-motion: reduce) {
   .voc-feedback-svg .voc-fb-arc,
   .voc-feedback-svg .voc-fb-arrow,
-  .voc-feedback-svg .voc-fb-plus {
+  .voc-feedback-svg .voc-fb-plus,
+  .voc-feedback-svg .voc-fb-label {
     animation: none;
     opacity: 1;
   }
