@@ -376,13 +376,6 @@ code {
   white-space: nowrap;
 }
 
-.history-slider-description {
-  max-width: 960px;
-  margin: 0 0 1rem;
-  color: var(--muted);
-  font-size: clamp(1rem, 1.35vw, 1.12rem);
-}
-
 .history-slider-card {
   min-height: auto;
 }
