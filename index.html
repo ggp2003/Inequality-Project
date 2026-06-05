@@ -8,9 +8,26 @@
       name="description"
       content="Interactive comparisons of pretax Gini inequality across political economies and the US-France gap."
     >
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Efficiency &amp; Equality: A Comparative Political-Economy Analysis">
+    <meta
+      property="og:description"
+      content="Do economies face a real growth-vs-fairness trade-off? An interactive look at Varieties of Capitalism, efficiency, equality, and shock resilience."
+    >
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Efficiency &amp; Equality: A Comparative Political-Economy Analysis">
+    <meta
+      name="twitter:description"
+      content="Do economies face a real growth-vs-fairness trade-off? An interactive look at Varieties of Capitalism, efficiency, equality, and shock resilience."
+    >
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23fbf8f3'/%3E%3Ccircle%20cx='12'%20cy='16'%20r='7.5'%20fill='%230000FF'/%3E%3Ccircle%20cx='20'%20cy='16'%20r='7.5'%20fill='%23FF0000'%20fill-opacity='0.82'/%3E%3C/svg%3E"
+    >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#story-abstract">Skip to content</a>
     <main>
       <header class="page-hero">
         <h1 class="page-title">
@@ -19,15 +36,101 @@
         </h1>
         <p class="page-copyright">Copyright &copy; 2026 Garry Piepenbrock</p>
         <nav class="page-nav" aria-label="Page sections">
+          <a href="#story-abstract">The Question</a>
           <a href="#voc-typology">Varieties of Capitalism</a>
           <a href="#voc-map-section">VoC Census</a>
           <a href="#voc-efficiency">Efficiency-Equality</a>
           <a href="#us-france">US-France Case Study</a>
           <a href="#boeing-airbus">Boeing-Airbus Case Study</a>
+          <a href="#takeaway">Takeaway</a>
           <a href="#references">References</a>
           <a href="slides.html">Presentation</a>
         </nav>
       </header>
+
+      <section id="story-abstract" class="story-abstract" aria-labelledby="story-abstract-title">
+        <p class="eyebrow">The Question</p>
+        <p class="story-hook">
+          Rich or fair&mdash;pick one. That has been capitalism&rsquo;s supposed bargain for two
+          centuries. This site asks whether the trade-off is real.
+        </p>
+        <h2 id="story-abstract-title" class="story-question">
+          When countries organize capitalism around efficiency (LMEs) versus equality (CMEs), do
+          they truly face a growth&#8209;vs&#8209;fairness trade-off&mdash;and which model delivers
+          more human progress?
+        </h2>
+        <p class="story-thesis">
+          <span class="story-thesis-label">The short answer.</span>
+          The trade-off is weaker than advertised: coordinated economies buy large equality gains
+          for a modest efficiency cost&mdash;and absorb shocks far better, a resilience dividend
+          invisible in any single-year snapshot.
+        </p>
+        <ol class="story-path" aria-label="How this analysis unfolds">
+          <li><span>01</span> Two ideal types of capitalism, and why they diverge</li>
+          <li><span>02</span> Who lives under each model, weighted by population</li>
+          <li><span>03</span> The efficiency&ndash;equality frontier, country by country</li>
+          <li><span>04</span> A century of US vs. France</li>
+          <li><span>05</span> A firm-level duel: Boeing vs. Airbus</li>
+          <li><span>06</span> What it means for progress</li>
+        </ol>
+      </section>
+
+      <section id="story-frame" class="story-frame" aria-label="Framing">
+        <div class="voc-card story-callout">
+          <p class="eyebrow">What&rsquo;s New Here</p>
+          <h3 class="story-callout-title">Original contributions</h3>
+          <ul class="story-contrib-list">
+            <li>
+              <strong>An original Boeing&ndash;Airbus deliveries dataset (1955&ndash;2025)</strong>,
+              hand-assembled to test the LME&ndash;CME contrast at the level of two competing firms.
+            </li>
+            <li>
+              <strong>A modified Irish GNI splice</strong> that strips out multinational accounting
+              distortions so Ireland can re-enter the LME comparison honestly.
+            </li>
+            <li>
+              <strong>A population-weighted VoC census</strong>, sizing each variety of capitalism
+              by the people who actually live under it rather than by country count.
+            </li>
+            <li>
+              <strong>An efficiency&ndash;equality &ldquo;possibilities frontier&rdquo; framing</strong>
+              that turns the trade-off debate into a moving curve you can watch evolve over a century.
+            </li>
+          </ul>
+        </div>
+        <div class="voc-card story-callout story-callout--progress">
+          <p class="eyebrow">Why This Matters for Progress</p>
+          <h3 class="story-callout-title">The stakes</h3>
+          <dl class="story-progress-grid">
+            <div>
+              <dt>Who gains</dt>
+              <dd>
+                Workers and households in coordinated economies capture more of the growth they help
+                produce&mdash;without giving up much output.
+              </dd>
+            </div>
+            <div>
+              <dt>The engine &amp; bottleneck</dt>
+              <dd>
+                Institutions, not just technology, set the pace: how capital and labor coordinate
+                decides whether progress is broadly shared or narrowly captured.
+              </dd>
+            </div>
+            <div>
+              <dt>What we learn for the future</dt>
+              <dd>
+                In a volatile, shock-prone world, the resilience of coordinated models is a form of
+                progress that single-year growth statistics miss entirely.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">01</span>
+        <span class="section-divider-rule"></span>
+      </div>
 
       <section id="voc-typology" class="voc-typology-section" aria-labelledby="voc-typology-title">
         <div class="voc-typology-intro">
@@ -160,6 +263,11 @@
         </div>
       </section>
 
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">02</span>
+        <span class="section-divider-rule"></span>
+      </div>
+
       <section id="voc-map-section" class="voc-map-section" aria-labelledby="voc-map-section-title">
         <div class="voc-map-intro">
           <p class="eyebrow">Political Economy Taxonomy</p>
@@ -169,6 +277,15 @@
             composition of each VoC census over time.
           </p>
         </div>
+
+        <aside class="insight-note" aria-label="What to look for">
+          <p class="insight-note-kicker">What to look for</p>
+          <p>
+            Drag the slider across the decades: watch how the population living under each model
+            shifts as countries are added and reclassified&mdash;the &ldquo;size&rdquo; of each
+            variety of capitalism is about people, not just a count of nations.
+          </p>
+        </aside>
 
         <div class="voc-card voc-census-card">
           <div class="voc-map-heading">
@@ -222,6 +339,11 @@
         </div>
       </section>
 
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">03</span>
+        <span class="section-divider-rule"></span>
+      </div>
+
       <section id="voc-efficiency" class="voc-section" aria-labelledby="voc-title">
         <div class="voc-intro">
           <p class="eyebrow">Cross-sectional Analysis</p>
@@ -234,6 +356,15 @@
             <a href="ireland.html">Here</a> is the analysis with modified Irish GNI data included.
           </p>
         </div>
+
+        <aside class="insight-note" aria-label="What to look for">
+          <p class="insight-note-kicker">What to look for</p>
+          <p>
+            CMEs (red) cluster toward higher equality while LMEs (blue) cluster toward higher
+            efficiency&mdash;but notice how close the two trendlines sit on the efficiency axis. The
+            equality gap between the families is large; the efficiency gap is surprisingly small.
+          </p>
+        </aside>
 
         <div class="voc-card">
           <h3 id="voc-chart-title" class="voc-chart-title">VoC Efficiency-Equality Space</h3>
@@ -387,6 +518,11 @@
 
       </section>
 
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">04</span>
+        <span class="section-divider-rule"></span>
+      </div>
+
       <section id="us-france" class="history-slider-section" aria-labelledby="history-slider-title">
         <div class="history-slider-intro">
           <p class="eyebrow">US-France Case Study</p>
@@ -398,6 +534,15 @@
             Explore how France&rsquo;s Mixed Market Economy (MME) status has evolved towards CMEs.
           </p>
         </div>
+
+        <aside class="insight-note" aria-label="What to look for">
+          <p class="insight-note-kicker">What to look for</p>
+          <p>
+            Play each timeline and track the gap line. France pulls steadily ahead on equality
+            while the efficiency gap stays modest&mdash;then read the two together on the
+            possibilities frontier to see the trade-off shrink in motion across a century.
+          </p>
+        </aside>
 
         <div class="history-slider-block">
           <h3 class="history-slider-subheading">A Century of US-France <em>Equality</em> Performance (1920–2020)</h3>
@@ -490,6 +635,11 @@
 
       </section>
 
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">05</span>
+        <span class="section-divider-rule"></span>
+      </div>
+
       <section id="boeing-airbus" class="history-slider-section" aria-labelledby="boeing-airbus-title">
         <div class="history-slider-intro">
           <p class="eyebrow">Microeconomic Case Study</p>
@@ -502,6 +652,16 @@
             exogenous shocks).
           </p>
         </div>
+
+        <aside class="insight-note" aria-label="What to look for">
+          <p class="insight-note-kicker">What to look for</p>
+          <p>
+            Watch the two shock markers&mdash;9/11 (2001) and COVID-19 (2020). The LME firm&rsquo;s
+            deliveries swing hard with each shock, while the CME firm&rsquo;s line bends far less.
+            That muted response is the resilience dividend, made visible at the level of a single
+            firm.
+          </p>
+        </aside>
 
         <div class="history-slider-block">
           <h3 class="history-slider-subheading">Commercial Aircraft Deliveries (1955&ndash;2025)</h3>
@@ -539,6 +699,70 @@
           </div>
         </div>
 
+      </section>
+
+      <div class="section-divider" aria-hidden="true">
+        <span class="section-divider-num">06</span>
+        <span class="section-divider-rule"></span>
+      </div>
+
+      <section id="takeaway" class="story-takeaway-section" aria-labelledby="takeaway-title">
+        <div class="story-takeaway-intro">
+          <p class="eyebrow">The Takeaway</p>
+          <h2 id="takeaway-title">So is it rich <em>or</em> fair?</h2>
+        </div>
+
+        <p class="story-takeaway-line">
+          Equality isn&rsquo;t the price of progress&mdash;in a volatile world, it can be one of its
+          engines.
+        </p>
+
+        <div class="story-takeaway-grid">
+          <div class="voc-card story-callout">
+            <p class="eyebrow">The Progress Lens</p>
+            <h3 class="story-callout-title">What we learned</h3>
+            <p>
+              Across the census, the frontier, a century of US&ndash;France history, and a
+              firm-level Boeing&ndash;Airbus duel, the same pattern recurs: coordinated economies
+              trade a small efficiency cost for a large equality gain&mdash;and ride out shocks more
+              smoothly. The supposed growth-vs-fairness bargain is real only at the margins; the
+              bigger story is resilience that single-year snapshots never capture.
+            </p>
+          </div>
+          <div class="voc-card story-callout story-callout--limits">
+            <p class="eyebrow">Limitations &amp; Counterpoints</p>
+            <h3 class="story-callout-title">Where to push back</h3>
+            <ul class="story-limits-list">
+              <li>
+                Correlation isn&rsquo;t cause: institutions, culture, and history co-evolve, so
+                LME&ndash;CME labels compress a lot of within-group variation.
+              </li>
+              <li>
+                The LME&ndash;CME binary is a simplification&mdash;most real economies, France
+                included, are mixed cases that drift over time.
+              </li>
+              <li>
+                Boeing vs. Airbus is one vivid duopoly, not proof; firm-level results illustrate the
+                mechanism rather than establish it economy-wide.
+              </li>
+              <li>
+                Measures matter: Gini and GDP per capita each miss things, and the Irish GNI
+                adjustment shows how sensitive rankings can be to accounting choices.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="data-methods" aria-labelledby="data-methods-title">
+          <p class="eyebrow">Data &amp; Methods</p>
+          <h3 id="data-methods-title" class="data-methods-title">How this was built</h3>
+          <ul class="data-methods-list">
+            <li><strong>Inequality:</strong> pre- and post-tax Gini coefficients, World Inequality Database.</li>
+            <li><strong>Efficiency:</strong> GDP per capita (unadjusted and PPP), Maddison Project Database.</li>
+            <li><strong>Firm-level:</strong> an original Boeing &amp; Airbus deliveries dataset, 1955&ndash;2025.</li>
+            <li><strong>Methods:</strong> population-weighted VoC census, annual OLS trendlines per variety, and a modified Irish GNI splice; charts built with D3.</li>
+          </ul>
+        </aside>
       </section>
 
       <section id="references" class="references-section" aria-labelledby="references-title">
@@ -591,6 +815,13 @@
 
     </main>
 
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">
+      <span class="sr-only">Back to top</span>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+        <path d="M12 5l-7 7h4v7h6v-7h4z" fill="currentColor"></path>
+      </svg>
+    </button>
+
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
     <script src="census.js"></script>
@@ -600,5 +831,6 @@
     <script src="efficiency-history-slider.js"></script>
     <script src="firm-competition-slider.js"></script>
     <script src="gap-space.js"></script>
+    <script src="enhancements.js"></script>
   </body>
 </html>
