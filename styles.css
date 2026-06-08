@@ -2446,6 +2446,10 @@ code {
   text-align: left;
 }
 
+.story-takeaway-grid .story-callout--contributions {
+  grid-column: 1 / -1;
+}
+
 .data-methods {
   max-width: 920px;
   margin: 0 auto;
