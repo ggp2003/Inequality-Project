@@ -2293,6 +2293,7 @@ code {
 }
 
 .story-callout--contributions {
+  border-top-color: var(--gap);
   text-align: left;
 }
 
