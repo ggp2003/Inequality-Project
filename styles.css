@@ -69,6 +69,14 @@ body {
   white-space: nowrap;
 }
 
+.page-title-efficiency {
+  color: var(--lme);
+}
+
+.page-title-equality {
+  color: var(--cme);
+}
+
 .page-title-subtitle {
   font-weight: 400;
   font-size: 0.62em;
